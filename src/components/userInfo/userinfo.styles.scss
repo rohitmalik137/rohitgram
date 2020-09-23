@@ -1,0 +1,26 @@
+.userInfoContainer {
+  margin-left: 75px;
+
+  .userInfoContainer--section {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+
+    .userInfoContainer--username {
+      font-size: x-large;
+      font-weight: 500;
+    }
+    .userInfoContainer--edit {
+      border: 1px solid black;
+      padding: 0 5px;
+      line-height: 36px;
+      margin: 10px;
+      margin: 0;
+    }
+
+    .userInfoContainer--section--inner {
+      padding: 5px;
+      margin: 0 10px;
+    }
+  }
+}

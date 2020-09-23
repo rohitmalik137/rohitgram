@@ -1,0 +1,18 @@
+.profilePageContainer {
+  width: 75%;
+  margin: auto;
+  margin-top: 25px;
+
+  .profilePageContainer--upper {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 50px;
+
+    .user-profile-info {
+      .user-profile-info--section {
+        display: flex;
+        justify-content: space-evenly;
+      }
+    }
+  }
+}

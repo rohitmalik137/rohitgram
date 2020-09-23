@@ -1,0 +1,32 @@
+$sub-color: #cacaca;
+$main-color: black;
+$input-background: #f1f0f0;
+$button-background: #1b76ec;
+
+.group {
+  padding-bottom: 10px;
+
+  .formButton {
+    background-color: $button-background !important;
+    color: white !important;
+    margin: 10px auto !important;
+  }
+
+  .form-input {
+    background: none;
+    background-color: $input-background;
+    color: $main-color;
+    font-size: 15px;
+    padding: 10px;
+    display: block;
+    width: 80%;
+    margin: auto;
+    border: none;
+    border-radius: 3px;
+    border: 1px solid $sub-color;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

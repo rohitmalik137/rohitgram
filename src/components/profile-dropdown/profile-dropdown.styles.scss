@@ -1,0 +1,23 @@
+.profile-dropdown {
+  position: absolute;
+  width: 200px;
+  //   height: 150px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 20px;
+  border: 1px solid black;
+  background-color: white;
+  top: 60px;
+  right: 80px;
+  z-index: 5;
+
+  .profile-dropdown__div {
+    padding: 3px;
+  }
+
+  hr {
+    color: black;
+    margin: 0;
+    padding: 0;
+  }
+}
