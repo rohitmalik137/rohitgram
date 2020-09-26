@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import SinglePost from '../../components/single-post/single-post.component';
+import SinglePostHeader from '../../components/single-post-header/single-post-header.component';
+import Comments from '../../components/comments/comments.component';
 import './single-post.styles.scss';
 
 const SinglePostPage = ({ match }) => {
@@ -21,10 +23,9 @@ const SinglePostPage = ({ match }) => {
           : null}
       </div>
       <div className="singlePostPageContainer--right">
-        <div className="singlePostPage--header">
-          <div className="singlePostPage--header--left">
-            <i className="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
-          </div>
+        <SinglePostHeader />
+        <div className="singlePostPageContainer--comments">
+          <Comments />
         </div>
       </div>
     </div>

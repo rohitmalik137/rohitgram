@@ -15,7 +15,11 @@ const Posts = () => {
       {allPosts
         ? allPosts.map((post) => {
             return (
-              <Link to={`/p/${post._id}`} className="postsContainer--card">
+              <Link
+                to={`/p/${post._id}`}
+                key={post._id}
+                className="postsContainer--card"
+              >
                 <SinglePost post={post} key={post._id} />
               </Link>
             );

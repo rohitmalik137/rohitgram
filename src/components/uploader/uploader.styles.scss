@@ -1,0 +1,40 @@
+.uploaderContainer {
+  position: absolute;
+  background-color: grey;
+  padding: 2px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  .rounded {
+    padding: 10px;
+  }
+
+  #fileInput {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  #fileInputButton {
+    font-family: calibri;
+    width: 100%;
+    padding: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border: 1px dashed #bbb;
+    text-align: center;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+
+  .uploaderContainer--textarea {
+    margin-bottom: 10px;
+    background-color: #ddd;
+    padding: 10px;
+
+    &::placeholder {
+      color: black;
+    }
+  }
+}

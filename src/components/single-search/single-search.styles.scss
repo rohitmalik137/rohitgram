@@ -1,0 +1,19 @@
+.singleSearchContainer {
+  display: flex;
+  padding: 15px 10px;
+  align-items: center;
+  color: black;
+  border-bottom: 1px solid rgb(190, 190, 190);
+
+  .singleSearchContainer--avatar {
+    margin-right: 10px;
+  }
+  .singleSearchContainer--username {
+    font-size: large;
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: #c7c7c7;
+  }
+}

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { userPosts } from '../../redux/actions/post.actions';
+import { userInfo } from '../../redux/actions/user.actions';
 import Avatar from '../../components/avatar/avatar.component';
 import UserInfo from '../../components/userInfo/userinfo.component';
 import Posts from '../../components/posts/posts.component';
@@ -12,6 +13,7 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const { username } = useParams();
   // console.log(match.params.username);
+  dispatch(userInfo({ username }));
   useEffect(() => {
     dispatch(userPosts({ username }));
   }, [dispatch, username]);

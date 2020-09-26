@@ -48,7 +48,7 @@ const LoginPage = () => {
       </div>
       <div className="loginContainer--lower">
         <p>
-          Don't have an account? <Link to="/signup">Sign up</Link>
+          Don't have an account? <Link to="/accounts/signup">Sign up</Link>
         </p>
       </div>
     </div>

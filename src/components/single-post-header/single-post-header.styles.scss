@@ -1,0 +1,13 @@
+.singlePostHeaderContainer {
+  display: flex;
+  justify-content: flex-start;
+  padding: 15px 25px;
+  align-items: center;
+  border-bottom: 1px solid rgb(172, 172, 172);
+
+  .singlePostHeaderContainer--username {
+    margin-left: 20px;
+    font-size: large;
+    font-weight: bold;
+  }
+}
