@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { returnErrors } from './error.actions';
+import { tokenConfig } from './auth.actions';
 import {
   GET_USERS,
   USERS_LOADING,
@@ -7,17 +8,20 @@ import {
   USER_INFO_LOADING,
   GET_USER_INFO,
   USER_INFO_FETCHING_FAIL,
+  PROFILE_LOADING,
+  PROFILE_LOADED,
+  PROFILE_LOADING_FAIL,
 } from './types';
 
 const backend_uri = 'http://localhost:7000';
 
-export const usersList = () => (dispatch) => {
-  const config = {
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
+const config = {
+  headers: {
+    'Content-type': 'application/json',
+  },
+};
 
+export const usersList = () => (dispatch) => {
   dispatch({ type: USERS_LOADING });
 
   axios
@@ -37,11 +41,6 @@ export const usersList = () => (dispatch) => {
 };
 
 export const userInfo = ({ username }) => (dispatch) => {
-  const config = {
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
   dispatch({ type: USER_INFO_LOADING });
   // const body = JSON.stringify({ username });
   axios
@@ -61,12 +60,6 @@ export const userInfo = ({ username }) => (dispatch) => {
 };
 
 export const updateFollow = ({ followedUser }) => (dispatch, getState) => {
-  //headers
-  const config = {
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
   const username = getState().auth.user.username;
   console.log(username);
   const body = JSON.stringify({ username, followedUser });
@@ -74,48 +67,66 @@ export const updateFollow = ({ followedUser }) => (dispatch, getState) => {
   axios
     .patch(`${backend_uri}/follow`, body, config)
     .then((res) => {
-      // console.log(res);
-      // dispatch({
-      //   type: REGISTER_SUCCESS,
-      //   payload: res.data,
-      // });
+      dispatch({
+        type: PROFILE_LOADED,
+        payload: res.data.data,
+      });
     })
     .catch((err) => {
-      // dispatch(
-      //   returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
-      // );
-      // dispatch({
-      //   type: REGISTER_FAIL,
-      // });
+      dispatch(
+        returnErrors(err.response.data, err.response.status, 'FOLLOW_FAIL')
+      );
+      dispatch({
+        type: PROFILE_LOADING_FAIL,
+      });
     });
 };
 
 export const updateUnfollow = ({ followedUser }) => (dispatch, getState) => {
-  //headers
-  const config = {
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
   const username = getState().auth.user.username;
   console.log(username);
   const body = JSON.stringify({ username, followedUser });
+  dispatch({ type: PROFILE_LOADING });
 
   axios
     .patch(`${backend_uri}/unfollow`, body, config)
     .then((res) => {
-      // console.log(res);
-      // dispatch({
-      //   type: REGISTER_SUCCESS,
-      //   payload: res.data,
-      // });
+      dispatch({
+        type: PROFILE_LOADED,
+        payload: res.data.data,
+      });
     })
     .catch((err) => {
-      // dispatch(
-      //   returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
-      // );
-      // dispatch({
-      //   type: REGISTER_FAIL,
-      // });
+      dispatch(
+        returnErrors(err.response.data, err.response.status, 'UNFOLLOW_FAIL')
+      );
+      dispatch({
+        type: PROFILE_LOADING_FAIL,
+      });
+    });
+};
+
+export const updateProfile = ({ formData }) => (dispatch, getState) => {
+  dispatch({ type: PROFILE_LOADING });
+
+  axios
+    .patch(`${backend_uri}/profile`, formData, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: PROFILE_LOADED,
+        payload: res.data.data,
+      });
+    })
+    .catch((err) => {
+      dispatch(
+        returnErrors(
+          err.response.data,
+          err.response.status,
+          'PROFILE_LOADING_FAIL'
+        )
+      );
+      dispatch({
+        type: PROFILE_LOADING_FAIL,
+      });
     });
 };

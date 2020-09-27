@@ -5,6 +5,9 @@ import {
   USER_INFO_LOADING,
   GET_USER_INFO,
   USER_INFO_FETCHING_FAIL,
+  PROFILE_LOADING,
+  PROFILE_LOADED,
+  PROFILE_LOADING_FAIL,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -22,6 +25,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         isLoading: false,
       };
     case GET_USER_INFO:
+    case PROFILE_LOADED:
       return {
         ...state,
         userInfo: action.payload,
@@ -29,12 +33,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
       };
     case USERS_LOADING:
     case USER_INFO_LOADING:
+    case PROFILE_LOADING:
       return {
         ...state,
         isLoading: true,
       };
     case USERS_FETCHING_FAIL:
     case USER_INFO_FETCHING_FAIL:
+    case PROFILE_LOADING_FAIL:
       return {
         ...state,
         userPosts: [],

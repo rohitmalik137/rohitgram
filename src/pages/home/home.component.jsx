@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
-import Uploader from '../../components/uploader/uploader.component';
 import './home.styles.scss';
+import Uploader from '../../components/uploader/uploader.component';
+import { toggleUploader } from '../../redux/actions/toggle.actions';
 
 const HomePage = () => {
-  const [toggleUpload, setToggleUpload] = useState(false);
+  const dispatch = useDispatch();
+
+  // const [toggleUpload, setToggleUpload] = useState(false);
   return (
     <div>
-      {toggleUpload ? <Uploader /> : null}
+      <Uploader />
       <h2>Home Page!</h2>
-      <Button onClick={(event) => setToggleUpload(!toggleUpload)}>
-        Upload!
-      </Button>
+      <Button onClick={() => dispatch(toggleUploader())}>Upload!</Button>
     </div>
   );
 };

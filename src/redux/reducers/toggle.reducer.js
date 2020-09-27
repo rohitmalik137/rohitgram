@@ -1,7 +1,8 @@
-import { TOGGLE, TOGGLE_SEARCH } from '../actions/types';
+import { TOGGLE, TOGGLE_SEARCH, TOGGLE_UPLOADER } from '../actions/types';
 const INITIAL_STATE = {
   isHidden: false,
   toggleSearch: false,
+  toggleUploader: false,
 };
 
 const toggleReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,11 @@ const toggleReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         toggleSearch: !state.toggleSearch,
+      };
+    case TOGGLE_UPLOADER:
+      return {
+        ...state,
+        toggleUploader: !state.toggleUploader,
       };
     default:
       return state;

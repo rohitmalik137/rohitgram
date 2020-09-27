@@ -5,8 +5,42 @@
   border-radius: 50%;
   overflow: hidden;
   margin-left: 75px;
+  cursor: pointer;
 
   .avatarImage {
     width: 150px;
+  }
+}
+
+.avatarContainer--body {
+  text-align: center;
+
+  .avatarContainer--header {
+    padding: 15px;
+    font-weight: bolder;
+    border-bottom: 1px solid rgb(204, 204, 204);
+  }
+  .avatarContainer--upload {
+    padding: 10px;
+    font-weight: bolder;
+    color: rgb(14, 93, 240);
+    border-bottom: 1px solid rgb(204, 204, 204);
+    cursor: pointer;
+  }
+  .avatarContainer--remove {
+    padding: 10px;
+    font-weight: bolder;
+    color: rgb(219, 45, 45);
+    border-bottom: 1px solid rgb(204, 204, 204);
+    cursor: pointer;
+  }
+  .avatarContainer--cancel {
+    padding: 10px;
+    font-weight: bolder;
+    color: grey;
+    cursor: pointer;
+  }
+  #fileInput {
+    display: none;
   }
 }
