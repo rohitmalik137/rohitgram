@@ -1,21 +1,31 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import './home.styles.scss';
 import Uploader from '../../components/uploader/uploader.component';
-import { toggleUploader } from '../../redux/actions/toggle.actions';
+import Stories from '../../components/stories/stories.component';
+import Suggested from '../../components/suggested/suggested.component';
+import AllPosts from '../../components/all-posts/all-posts.component';
+import { allPosts } from '../../redux/actions/post.actions';
 
 const HomePage = () => {
   const dispatch = useDispatch();
 
-  // const [toggleUpload, setToggleUpload] = useState(false);
+  useEffect(() => {
+    dispatch(allPosts());
+  }, [dispatch]);
+
   return (
-    <div>
+    <>
+      <div className="homePageContainer">
+        {/* <div> */}
+        <Stories />
+        <AllPosts />
+        {/* </div> */}
+        {/* <Suggested /> */}
+      </div>
       <Uploader />
-      <h2>Home Page!</h2>
-      <Button onClick={() => dispatch(toggleUploader())}>Upload!</Button>
-    </div>
+    </>
   );
 };
 

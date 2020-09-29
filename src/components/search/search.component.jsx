@@ -5,7 +5,7 @@ import './search.styles.scss';
 import SingleSearch from '../single-search/single-search.component';
 
 const Search = ({ searchValue }) => {
-  const usersList = useSelector((state) => state.usersList.users);
+  const usersList = useSelector((state) => state.user.users);
   return (
     <div className="searchContainer">
       {searchValue.length

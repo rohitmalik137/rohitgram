@@ -10,7 +10,7 @@ import { updateProfile, userInfo } from '../../redux/actions/user.actions';
 const Avatar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const dummyUrl = useSelector((state) => state.usersList.userInfo);
+  const dummyUrl = useSelector((state) => state.user.userInfo);
   const imgSrc = dummyUrl ? dummyUrl.profileUrl : null;
   const myUsername = user ? user.username : null;
   const [show, setShow] = useState(false);

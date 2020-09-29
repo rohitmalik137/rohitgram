@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { toggleDropdown } from '../../redux/actions/toggle.actions';
+import {
+  toggleDropdown,
+  hideDropdown,
+} from '../../redux/actions/toggle.actions';
 import { logout } from '../../redux/actions/auth.actions';
 import './profile-dropdown.styles.scss';
 
+function useOutsideAlerter(ref) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        dispatch(hideDropdown());
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref, dispatch]);
+}
+
 const ProfileDropdown = () => {
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
   const dispatch = useDispatch();
 
   const toggle = useSelector((state) => state.toggle.isHidden);
-
-  // let history = useHistory();
   const user = useSelector((state) => state.auth.user);
   const username = user ? user.username : null;
-  // console.log(username);
 
   return (
-    <div>
+    <div ref={wrapperRef}>
       {toggle ? (
         <div className="profile-dropdown">
           <Link

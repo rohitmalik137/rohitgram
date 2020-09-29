@@ -1,4 +1,9 @@
-import { TOGGLE, TOGGLE_SEARCH, TOGGLE_UPLOADER } from '../actions/types';
+import {
+  TOGGLE,
+  TOGGLE_SEARCH,
+  TOGGLE_UPLOADER,
+  HIDE_DROPDOWN,
+} from '../actions/types';
 const INITIAL_STATE = {
   isHidden: false,
   toggleSearch: false,
@@ -11,6 +16,11 @@ const toggleReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isHidden: !state.isHidden,
+      };
+    case HIDE_DROPDOWN:
+      return {
+        ...state,
+        isHidden: false,
       };
     case TOGGLE_SEARCH:
       return {

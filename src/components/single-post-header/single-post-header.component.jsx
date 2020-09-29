@@ -1,16 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './single-post-header.styles.scss';
 
-const SinglePostHeader = () => {
-  const user = useSelector((state) => state.auth.user);
+const SinglePostHeader = ({ username }) => {
   return (
     <div className="singlePostHeaderContainer">
       <i className="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
-      <div className="singlePostHeaderContainer--username">{user.username}</div>
+      <Link to={`/${username}`} className="singlePostHeaderContainer--username">
+        {username}
+      </Link>
       <i
-        className="fa fa-bars"
+        className="fa fa-ellipsis-h"
         style={{ marginLeft: 'auto' }}
         aria-hidden="true"
       ></i>

@@ -10,7 +10,7 @@ import { updateFollow, updateUnfollow } from '../../redux/actions/user.actions';
 const UserInfo = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const userInformation = useSelector((state) => state.usersList.userInfo);
+  const userInformation = useSelector((state) => state.user.userInfo);
   const { username } = useParams();
 
   const [showFollowers, setShowFollowers] = useState(false);

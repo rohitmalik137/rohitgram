@@ -2,10 +2,10 @@ import React from 'react';
 
 import './single-post.styles.scss';
 
-const SinglePost = ({ post }) => {
+const SinglePost = ({ mediaUrl }) => {
   // console.log(post.mediaUrl);
   let domain = 'http://localhost:3000/';
-  let mainUrl = domain + post.mediaUrl;
+  let mainUrl = domain + mediaUrl;
   return (
     <img src={mainUrl} alt="userPost" className="singlePostContainer--image" />
   );

@@ -28,7 +28,7 @@ const Header = () => {
   }, [dispatch, searchValue]);
 
   return (
-    <div>
+    <div className="headerContainer">
       <Navbar bg="light">
         <div className="container">
           <Navbar.Brand>

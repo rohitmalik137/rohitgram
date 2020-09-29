@@ -6,7 +6,8 @@ import SinglePost from '../single-post/single-post.component';
 import './posts.styles.scss';
 
 const Posts = () => {
-  const userPosts = useSelector((state) => state.user.userPosts);
+  const userPosts = useSelector((state) => state.post.userPosts);
+  console.log(userPosts);
 
   const allPosts = userPosts ? userPosts.userPosts : null;
   // console.log(allPosts);
@@ -20,7 +21,7 @@ const Posts = () => {
                 key={post._id}
                 className="postsContainer--card"
               >
-                <SinglePost post={post} key={post._id} />
+                <SinglePost mediaUrl={post.mediaUrl} key={post._id} />
               </Link>
             );
           })

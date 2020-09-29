@@ -1,15 +1,23 @@
-.headerBrand {
-  font-family: 'Oleo Script', cursive;
-  font-size: larger;
-}
+.headerContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 
-.headerContainer--search {
-  position: relative;
-}
+  .headerBrand {
+    font-family: 'Oleo Script', cursive;
+    font-size: larger;
+  }
 
-.headerContainer--avatar {
-  width: 35px;
-  height: 35px;
-  border: 1px solid gray;
-  border-radius: 50%;
+  .headerContainer--search {
+    position: relative;
+  }
+
+  .headerContainer--avatar {
+    width: 35px;
+    height: 35px;
+    border: 1px solid gray;
+    border-radius: 50%;
+  }
 }

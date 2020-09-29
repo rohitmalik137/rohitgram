@@ -8,20 +8,48 @@
 
     .userInfoContainer--username {
       font-size: x-large;
-      font-weight: 500;
+      font-weight: bold;
     }
     .userInfoContainer--edit {
-      border: 1px solid black;
+      border: 1px solid rgb(167, 167, 167);
       padding: 0 5px;
-      line-height: 36px;
-      margin: 10px;
-      margin: 0;
     }
 
     .userInfoContainer--section--inner {
       padding: 5px;
       margin: 0 10px;
       cursor: pointer;
+    }
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .userInfoContainer {
+    margin-left: 45px;
+  }
+
+  .userInfoContainer--section {
+    margin-bottom: 7px;
+
+    .userInfoContainer--username {
+      font-size: larger;
+    }
+    .userInfoContainer--edit {
+      padding: 0 2px;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .userInfoContainer {
+    margin-left: 25px;
+  }
+
+  .userInfoContainer--section {
+    margin-bottom: 5px;
+
+    .userInfoContainer--username {
+      font-size: large;
     }
   }
 }

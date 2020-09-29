@@ -1,7 +1,7 @@
 .singlePostPageContainer {
   width: 900px;
-  border: 1px solid rgb(51, 51, 51);
-  margin: 50px auto;
+  border: 1px solid rgb(190, 190, 190);
+  margin: 112px auto;
   min-height: 500px;
   display: flex;
 
@@ -11,13 +11,9 @@
   }
 
   .singlePostPageContainer--right {
+    position: relative;
     width: 335px;
-
-    .singlePostPageContainer--comments {
-      height: 90%;
-      min-height: 433px;
-      border: 1px solid blue;
-    }
+    min-width: 335px;
   }
 }
 
@@ -30,10 +26,5 @@
   }
   .singlePostPageContainer--right {
     width: 435px !important;
-
-    .singlePostPageContainer--comments {
-      height: 75%;
-      border: 1px solid blue;
-    }
   }
 }

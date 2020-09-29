@@ -1,0 +1,19 @@
+.sidebar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.SinglePostFooterContainer {
+  width: 100%;
+  padding: 10px;
+
+  .SinglePostFooterContainer--icon {
+    margin-right: 10px;
+    cursor: pointer;
+
+    &:last-of-type {
+      float: right;
+    }
+  }
+}

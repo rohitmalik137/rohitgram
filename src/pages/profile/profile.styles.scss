@@ -1,7 +1,7 @@
 .profilePageContainer {
-  width: 75%;
+  width: 945px;
   margin: auto;
-  margin-top: 25px;
+  margin-top: 87px;
 
   .profilePageContainer--upper {
     display: flex;
@@ -12,6 +12,22 @@
       .user-profile-info--section {
         display: flex;
         justify-content: space-evenly;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .profilePageContainer--upper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+    .user-profile-info {
+      .user-profile-info--section {
+        display: flex;
+        justify-content: space-evenly;
+        font-size: 10px;
       }
     }
   }

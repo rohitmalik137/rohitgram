@@ -79,7 +79,6 @@ export const login = ({ uname_or_email, password }) => (dispatch) => {
   axios
     .post(`${backend_uri}/auth/login`, body, config)
     .then((res) => {
-      console.log(res);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data,

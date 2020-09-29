@@ -15,9 +15,9 @@ import userReducer from './reducers/user.reducer';
 export default combineReducers({
   auth: authReducer,
   error: errorReducer,
-  user: postReducer,
+  post: postReducer,
   toggle: toggleReducer,
-  usersList: userReducer,
+  user: userReducer,
 });
 
 // export default persistReducer(persistConfig, rootReducer);

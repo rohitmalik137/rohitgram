@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Input from '../input/input.component';
 import { loadUser } from '../../redux/actions/auth.actions';
 import { toggleUploader } from '../../redux/actions/toggle.actions';
+import { allPosts } from '../../redux/actions/post.actions';
 
 const Uploader = () => {
   const dispatch = useDispatch();
@@ -36,8 +37,6 @@ const Uploader = () => {
     const formData = new FormData();
     formData.append('mediaUrl', file);
     formData.append('caption', caption);
-    formData.append('likes', 0);
-    formData.append('comments', []);
     formData.append('userId', userId);
 
     const headers = {
@@ -47,7 +46,7 @@ const Uploader = () => {
     axios
       .post(`${backend_uri}/newpost`, formData, { headers: headers })
       .then((res) => {
-        console.log('post uploaded!!');
+        dispatch(allPosts());
       })
       .catch((error) => {
         console.log(error);
