@@ -1,7 +1,7 @@
 .commentsContainer {
   position: absolute;
   top: 75px;
-  bottom: 150px;
+  bottom: 180px;
   padding: 10px 25px;
   display: flex;
   flex-flow: column;
@@ -11,6 +11,12 @@
   width: 95%;
   overflow-y: auto;
   // scrollbar-width: none;
+
+  .nocomments {
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+  }
 
   &::-webkit-scrollbar {
     width: 0;

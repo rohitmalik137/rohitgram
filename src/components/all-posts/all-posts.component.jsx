@@ -16,7 +16,10 @@ const AllPosts = () => {
         ? posts.map((post) => {
             return (
               <div className="allPostsContainer--singlepost" key={post._id}>
-                <SinglePostHeader username={post.userId.username} />
+                <SinglePostHeader
+                  profileUrl={post.userId.profileUrl}
+                  username={post.userId.username}
+                />
                 <SinglePost mediaUrl={post.mediaUrl} />
                 <SinglePostFooter post={post} />
               </div>

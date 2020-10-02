@@ -11,6 +11,7 @@ import {
   SINGLE_POST_LOADING,
   SINGLE_POST_LOADED,
   SINGLE_POST_FETCHING_FAIL,
+  COMMENT_ERROR,
 } from './types';
 import { tokenConfig } from './auth.actions';
 
@@ -78,6 +79,7 @@ export const singlePost = ({ postId }) => (dispatch) => {
   axios
     .get(`${backend_uri}/singlePost/${postId}`, config)
     .then((res) => {
+      console.log(res);
       dispatch({
         type: SINGLE_POST_LOADED,
         payload: res.data,
@@ -112,6 +114,47 @@ export const likeToggle = ({ postId }) => (dispatch, getState) => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: LIKE_TOGGLE_ERROR,
+      });
+    });
+};
+
+export const commentLikeToggle = ({ commentId }) => (dispatch, getState) => {
+  dispatch({ type: LIKE_TOGGLE_LOADING });
+  const username = getState().auth.user.username;
+  const body = JSON.stringify({ username, commentId });
+
+  // console.log(username, commentId);
+
+  axios
+    .patch(`${backend_uri}/likeCommentToggle`, body, tokenConfig(getState))
+    .then((res) => {
+      console.log(res);
+      dispatch({
+        type: LIKE_TOGGLE,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: LIKE_TOGGLE_ERROR,
+      });
+    });
+};
+
+export const addComment = ({ comment, postId }) => (dispatch, getState) => {
+  const userId = getState().auth.user._id;
+  const body = JSON.stringify({ userId, comment, postId });
+
+  axios
+    .patch(`${backend_uri}/addComment`, body, tokenConfig(getState))
+    .then(() => {})
+    .catch((err) => {
+      console.log(err);
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: COMMENT_ERROR,
       });
     });
 };

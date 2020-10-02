@@ -10,7 +10,9 @@ import { singlePost } from '../../redux/actions/post.actions';
 
 const SinglePostPage = ({ match }) => {
   const dispatch = useDispatch();
-  const userpost = useSelector((state) => state.post.singlePost);
+  const dummy = useSelector((state) => state.post.singlePost);
+  const userpost = dummy ? dummy.data : null;
+  const usercomments = dummy ? dummy.commentData : null;
 
   const postId = match.params.postId;
 
@@ -27,7 +29,7 @@ const SinglePostPage = ({ match }) => {
           </div>
           <div className="singlePostPageContainer--right">
             <SinglePostHeader username={userpost.userId.username} />
-            <Comments />
+            <Comments comments={usercomments} />
             <SinglePostFooter post={userpost} sidebar="true" />
           </div>
         </div>

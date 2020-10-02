@@ -5,15 +5,44 @@
   right: 0;
 }
 .SinglePostFooterContainer {
-  width: 100%;
-  padding: 10px;
+  width: 95%;
+  margin: 0 2.5%;
 
-  .SinglePostFooterContainer--icon {
-    margin-right: 10px;
-    cursor: pointer;
+  .SinglePostFooterContainer--header {
+    padding: 1.5%;
+    border-bottom: 1px solid rgb(202, 202, 202);
 
-    &:last-of-type {
-      float: right;
+    .SinglePostFooterContainer--icon {
+      margin-right: 10px;
+      cursor: pointer;
+
+      &:last-of-type {
+        float: right;
+      }
+    }
+  }
+
+  .SinglePostFooterContainer--footer {
+    position: relative;
+    padding: 1%;
+
+    .SinglePostFooterContainer--footer-input {
+      padding: 1.5%;
+      width: 90%;
+      border: none;
+      outline: none;
+      background-color: transparent;
+    }
+    .SinglePostFooterContainer--footer-button {
+      border: none;
+      outline: none;
+      background-color: transparent;
+      position: absolute;
+      right: 1%;
+      word-wrap: break-word;
+      top: 25%;
+      color: rgb(10, 170, 233);
+      font-weight: bold;
     }
   }
 }

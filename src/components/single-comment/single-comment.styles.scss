@@ -1,0 +1,49 @@
+li {
+  list-style: none;
+}
+.singleCommentContainer--avatarContainer {
+  margin-right: 1%;
+  .singleCommentContainer--avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+}
+.singleCommentContainer {
+  display: flex;
+  padding: 12px 16px 16px;
+  position: relative;
+
+  .singleCommentContainer--commentInfo {
+    margin-right: 7%;
+    line-height: 15px;
+    word-wrap: break-word;
+    width: 75%;
+
+    .singleCommentContainer--username {
+      margin-right: 5%;
+    }
+
+    .singleCommentContainer--comment {
+      padding: 0;
+      margin: 0;
+    }
+
+    .singleCommentContainer--likeNreply {
+      margin-top: 5px;
+
+      .likeNreply--option {
+        cursor: pointer;
+        margin-right: 10px;
+        font-size: smaller;
+        color: gray;
+      }
+    }
+  }
+
+  .singleCommentLike {
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+  }
+}

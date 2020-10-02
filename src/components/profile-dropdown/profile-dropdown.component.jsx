@@ -37,18 +37,35 @@ const ProfileDropdown = () => {
     <div ref={wrapperRef}>
       {toggle ? (
         <div className="profile-dropdown">
-          <Link
-            to={`/${username}`}
-            onClick={(event) => {
-              dispatch(toggleDropdown());
-              // history.push(`/${username}`);
-            }}
-            className="profile-dropdown__div"
-          >
-            Profile
-          </Link>
-          <div className="profile-dropdown__div">Saved</div>
-          <div className="profile-dropdown__div">Settings</div>
+          <div className="profile-dropdown__div">
+            <i
+              className="fa fa-user-circle-o profile-dropdown--icon"
+              aria-hidden="true"
+            ></i>
+            <Link
+              to={`/${username}`}
+              onClick={(event) => {
+                dispatch(toggleDropdown());
+                // history.push(`/${username}`);
+              }}
+            >
+              Profile
+            </Link>
+          </div>
+          <div className="profile-dropdown__div">
+            <i
+              className="fa fa-bookmark-o profile-dropdown--icon"
+              aria-hidden="true"
+            ></i>
+            <span>Saved</span>
+          </div>
+          <div className="profile-dropdown__div">
+            <i
+              className="fa fa-cog profile-dropdown--icon"
+              aria-hidden="true"
+            ></i>
+            <span>Settings</span>
+          </div>
           <hr />
           <div
             onClick={() => dispatch(logout())}

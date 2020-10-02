@@ -1,21 +1,19 @@
 import React from 'react';
 
 import './comments.styles.scss';
+import SingleComment from '../single-comment/single-comment.component';
 
-const Comments = () => {
+const Comments = ({ comments }) => {
   return (
-    <div className="commentsContainer">
-      <h3>Comments Section!</h3>
-      <h3>Comments Section!</h3>
-      <h3>Comments Section!</h3>
-      <h3>Comments Section!</h3>
-      <h3>Comments Section!</h3>
-      <h3>Comments Section!</h3>
-      <h3>Comments Section!</h3>
-      <h3>Comments Section!</h3>
-      <h3>Comments Section!</h3>
-      <h3>Comments Section!</h3>
-    </div>
+    <ul className="commentsContainer">
+      {comments.length ? (
+        comments.map((comment) => {
+          return <SingleComment comment={comment} key={comment._id} />;
+        })
+      ) : (
+        <div className="nocomments">No comments Yet!</div>
+      )}
+    </ul>
   );
 };
 

@@ -9,6 +9,7 @@ import {
   SINGLE_POST_LOADING,
   SINGLE_POST_LOADED,
   SINGLE_POST_FETCHING_FAIL,
+  COMMENT_ERROR,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -47,6 +48,7 @@ const postReducer = (state = INITIAL_STATE, action) => {
     case POSTS_FETCHING_FAIL:
     case LIKE_TOGGLE_ERROR:
     case SINGLE_POST_FETCHING_FAIL:
+    case COMMENT_ERROR:
       return {
         ...state,
         userPosts: null,
