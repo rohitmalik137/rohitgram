@@ -6,7 +6,7 @@ import './App.css';
 import Header from './components/header/header.component';
 import HomePage from './pages/home/home.component';
 import InboxPage from './pages/inbox/inbox.component';
-import ExplorePage from './pages/inbox/inbox.component';
+import ExplorePage from './pages/explore/explore.component';
 import ProfilePage from './pages/profile/profile.component';
 import LoginPage from './pages/login/login.component';
 import SignupPage from './pages/signup/signup.component';

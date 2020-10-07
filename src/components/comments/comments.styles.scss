@@ -12,6 +12,13 @@
   overflow-y: auto;
   // scrollbar-width: none;
 
+  .commentsHideNShow {
+    margin-left: 52px;
+    font-size: small;
+    color: gray;
+    cursor: pointer;
+  }
+
   .nocomments {
     text-align: center;
     font-size: larger;

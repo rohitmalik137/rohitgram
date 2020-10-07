@@ -37,21 +37,20 @@ const ProfileDropdown = () => {
     <div ref={wrapperRef}>
       {toggle ? (
         <div className="profile-dropdown">
-          <div className="profile-dropdown__div">
+          <Link
+            to={`/${username}`}
+            onClick={() => {
+              dispatch(toggleDropdown());
+              // history.push(`/${username}`);
+            }}
+            className="profile-dropdown__div"
+          >
             <i
               className="fa fa-user-circle-o profile-dropdown--icon"
               aria-hidden="true"
             ></i>
-            <Link
-              to={`/${username}`}
-              onClick={(event) => {
-                dispatch(toggleDropdown());
-                // history.push(`/${username}`);
-              }}
-            >
-              Profile
-            </Link>
-          </div>
+            <span>Profile</span>
+          </Link>
           <div className="profile-dropdown__div">
             <i
               className="fa fa-bookmark-o profile-dropdown--icon"

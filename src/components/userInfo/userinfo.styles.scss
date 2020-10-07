@@ -1,55 +1,43 @@
-.userInfoContainer {
-  margin-left: 75px;
+.userInfoContainer--section {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
 
-  .userInfoContainer--section {
+  .button {
     display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 10px;
-
-    .userInfoContainer--username {
-      font-size: x-large;
-      font-weight: bold;
-    }
-    .userInfoContainer--edit {
-      border: 1px solid rgb(167, 167, 167);
-      padding: 0 5px;
-    }
-
-    .userInfoContainer--section--inner {
-      padding: 5px;
-      margin: 0 10px;
-      cursor: pointer;
-    }
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(194, 194, 194);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: small;
+    color: black;
+    padding: 1px 7px;
   }
 }
 
-@media only screen and (max-width: 650px) {
-  .userInfoContainer {
-    margin-left: 45px;
-  }
+.userInfo--mobile {
+  width: 100%;
 
-  .userInfoContainer--section {
-    margin-bottom: 7px;
-
-    .userInfoContainer--username {
-      font-size: larger;
-    }
-    .userInfoContainer--edit {
-      padding: 0 2px;
-    }
+  .button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(194, 194, 194);
+    text-decoration: none;
+    font-weight: bolder;
+    color: black;
   }
 }
 
-@media only screen and (max-width: 500px) {
-  .userInfoContainer {
-    margin-left: 25px;
-  }
+.userSettings {
+  text-align: center;
 
-  .userInfoContainer--section {
-    margin-bottom: 5px;
-
-    .userInfoContainer--username {
-      font-size: large;
-    }
+  .userSettings--section {
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(185, 185, 185);
   }
 }

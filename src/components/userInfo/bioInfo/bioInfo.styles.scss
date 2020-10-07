@@ -1,0 +1,14 @@
+@media only screen and (max-width: 640px) {
+  .bioInfoContainer {
+    padding: 0 10px;
+    margin-bottom: 20px;
+
+    .bioInfo-user {
+      font-weight: bolder;
+    }
+
+    .bio {
+      max-width: 50%;
+    }
+  }
+}

@@ -4,20 +4,51 @@
   left: 0;
   right: 0;
   z-index: 10;
-
-  .headerBrand {
-    font-family: 'Oleo Script', cursive;
-    font-size: larger;
-  }
+  width: 100vw;
 
   .headerContainer--search {
     position: relative;
   }
+}
 
-  .headerContainer--avatar {
-    width: 35px;
-    height: 35px;
-    border: 1px solid gray;
-    border-radius: 50%;
+// @media only screen and (max-width: 641px) {
+.headerContainer-mobile {
+  width: 100vw;
+
+  .headerContainer-mobile--header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    font-size: x-large;
+    max-width: 100%;
+    z-index: 10;
   }
+
+  .headerContainer-mobile--footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    max-width: 100%;
+    z-index: 10;
+
+    .fa {
+      // border: 1px solid black;
+      font-size: x-large;
+    }
+  }
+}
+// }
+
+.headerContainer--avatar {
+  width: 35px;
+  height: 35px;
+  border: 1px solid gray;
+  border-radius: 50%;
+}
+
+.headerBrand {
+  font-family: 'Oleo Script', cursive;
+  font-size: larger;
 }

@@ -2,13 +2,23 @@
   display: flex;
   justify-content: flex-start;
   padding: 15px 25px;
+  width: 100%;
   height: 75px;
   align-items: center;
   border-bottom: 1px solid rgb(172, 172, 172);
 
   .singlePostHeaderContainer--username {
-    margin-left: 20px;
+    margin-left: 2%;
     font-size: large;
     font-weight: bold;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .singlePostHeaderContainer {
+    height: 10vw;
+    min-height: 40px;
+    padding: 1vw;
+    padding-right: 3vw;
   }
 }

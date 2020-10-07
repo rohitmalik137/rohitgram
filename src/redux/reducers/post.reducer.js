@@ -10,12 +10,16 @@ import {
   SINGLE_POST_LOADED,
   SINGLE_POST_FETCHING_FAIL,
   COMMENT_ERROR,
+  COMMENT_REPLIES_LOADING,
+  COMMENT_REPLIES_ERROR,
+  COMMENT_REPLIES_LOADED,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   userPosts: null,
   isLoading: false,
   singlePost: null,
+  commentReplies: null,
   allPosts: null,
 };
 
@@ -25,6 +29,12 @@ const postReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         userPosts: action.payload,
+        isLoading: false,
+      };
+    case COMMENT_REPLIES_LOADED:
+      return {
+        ...state,
+        commentReplies: action.payload,
         isLoading: false,
       };
     case GET_ALL_POSTS:
@@ -41,6 +51,7 @@ const postReducer = (state = INITIAL_STATE, action) => {
     case POSTS_LOADING:
     case SINGLE_POST_LOADING:
     case LIKE_TOGGLE_LOADING:
+    case COMMENT_REPLIES_LOADING:
       return {
         ...state,
         isLoading: true,
@@ -49,6 +60,7 @@ const postReducer = (state = INITIAL_STATE, action) => {
     case LIKE_TOGGLE_ERROR:
     case SINGLE_POST_FETCHING_FAIL:
     case COMMENT_ERROR:
+    case COMMENT_REPLIES_ERROR:
       return {
         ...state,
         userPosts: null,

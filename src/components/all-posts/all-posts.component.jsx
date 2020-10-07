@@ -8,7 +8,7 @@ import SinglePostFooter from '../single-post-footer/single-post-footer.component
 
 const AllPosts = () => {
   const posts = useSelector((state) => state.post.allPosts);
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <div className="allPostsContainer">
@@ -21,7 +21,7 @@ const AllPosts = () => {
                   username={post.userId.username}
                 />
                 <SinglePost mediaUrl={post.mediaUrl} />
-                <SinglePostFooter post={post} />
+                <SinglePostFooter post={post} key={post._id} />
               </div>
             );
           })

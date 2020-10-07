@@ -1,6 +1,7 @@
 .avatarContainer {
   width: 150px;
   height: 150px;
+  min-width: 150px;
   border: 1px solid grey;
   border-radius: 50%;
   overflow: hidden;
@@ -45,30 +46,18 @@
   }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 640px) {
   .avatarContainer {
-    width: 100px;
-    height: 100px;
+    width: 77px;
+    height: 77px;
+    min-width: 77px;
+    min-height: 77px;
     border: 1px solid grey;
-    margin-left: 25px;
+    margin-left: 10px;
     cursor: pointer;
 
     .avatarImage {
-      width: 100px;
-    }
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .avatarContainer {
-    width: 75px;
-    height: 75px;
-    border: 1px solid rgb(184, 184, 184);
-    margin-left: 15px;
-    cursor: pointer;
-
-    .avatarImage {
-      width: 75px;
+      width: 77px;
     }
   }
 }

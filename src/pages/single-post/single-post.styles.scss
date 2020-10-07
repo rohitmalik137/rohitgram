@@ -28,3 +28,17 @@
     width: 435px !important;
   }
 }
+
+@media only screen and (max-width: 735px) {
+  .singlePostPage-mobileContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 62px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .singlePostPage-mobileContainer {
+    margin-top: 52px;
+  }
+}

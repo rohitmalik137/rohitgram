@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import './single-post-footer.styles.scss';
 import {
@@ -12,6 +12,7 @@ import {
 import { Modal } from 'react-bootstrap';
 
 const SinglePostFooter = ({ post, sidebar }) => {
+  const history = useHistory();
   const [comment, setComment] = useState('');
   const [show, setShow] = useState(false);
 
@@ -22,13 +23,10 @@ const SinglePostFooter = ({ post, sidebar }) => {
   const postId = post._id;
   const user = useSelector((state) => state.auth.user);
   const username = user ? user.username : null;
-  // const singlepost = useSelector((state) => state.post.singlePost);
-  // const likes = singlepost ? singlepost.likes : [];
 
   const likeToggleFunc = () => {
     dispatch(likeToggle({ postId }));
     dispatch(allPosts());
-    dispatch(singlePost({ postId }));
   };
 
   const postComment = (e) => {
@@ -62,6 +60,7 @@ const SinglePostFooter = ({ post, sidebar }) => {
             ></i>
           )}
           <i
+            onClick={() => history.push(`/p/${post._id}`)}
             className="fa fa-comment-o fa-2x SinglePostFooterContainer--icon"
             aria-hidden="true"
           ></i>

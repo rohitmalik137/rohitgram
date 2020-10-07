@@ -1,9 +1,23 @@
 .allPostsContainer {
-  width: 614px;
-  margin-left: 30px;
+  width: 100%;
+  // margin-left: 30px;
 
   .allPostsContainer--singlepost {
     border: 1px solid rgb(190, 190, 190);
     margin-bottom: 50px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .allPostsContainer {
+    width: calc(100vw - 20px);
+    max-width: 100%;
+
+    .allPostsContainer--singlepost {
+      border: 1px solid rgb(190, 190, 190);
+      margin-bottom: 50px;
+      width: 100vw;
+      max-width: 100%;
+    }
   }
 }

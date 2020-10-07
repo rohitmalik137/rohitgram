@@ -12,6 +12,9 @@ import {
   SINGLE_POST_LOADED,
   SINGLE_POST_FETCHING_FAIL,
   COMMENT_ERROR,
+  COMMENT_REPLIES_LOADING,
+  COMMENT_REPLIES_ERROR,
+  COMMENT_REPLIES_LOADED,
 } from './types';
 import { tokenConfig } from './auth.actions';
 
@@ -98,15 +101,13 @@ export const likeToggle = ({ postId }) => (dispatch, getState) => {
   const username = getState().auth.user.username;
   const body = JSON.stringify({ username, postId });
 
-  console.log(username, postId);
-
   axios
     .patch(`${backend_uri}/updateLikes`, body, tokenConfig(getState))
     .then((res) => {
       console.log(res);
       dispatch({
         type: LIKE_TOGGLE,
-        payload: res.data.data,
+        payload: res.data,
       });
     })
     .catch((err) => {
@@ -128,9 +129,37 @@ export const commentLikeToggle = ({ commentId }) => (dispatch, getState) => {
   axios
     .patch(`${backend_uri}/likeCommentToggle`, body, tokenConfig(getState))
     .then((res) => {
-      console.log(res);
+      // console.log(res);
+      // dispatch({
+      //   type: LIKE_TOGGLE,
+      //   payload: res.data,
+      // });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
-        type: LIKE_TOGGLE,
+        type: LIKE_TOGGLE_ERROR,
+      });
+    });
+};
+
+export const repliedCommentLikeToggle = ({ commentId, parentCommentId }) => (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: LIKE_TOGGLE_LOADING });
+  const username = getState().auth.user.username;
+  const body = JSON.stringify({ username, commentId, parentCommentId });
+  axios
+    .patch(
+      `${backend_uri}/likeRepliedCommentToggle`,
+      body,
+      tokenConfig(getState)
+    )
+    .then((res) => {
+      dispatch({
+        type: COMMENT_REPLIES_LOADED,
         payload: res.data,
       });
     })
@@ -150,6 +179,50 @@ export const addComment = ({ comment, postId }) => (dispatch, getState) => {
   axios
     .patch(`${backend_uri}/addComment`, body, tokenConfig(getState))
     .then(() => {})
+    .catch((err) => {
+      console.log(err);
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: COMMENT_ERROR,
+      });
+    });
+};
+
+export const fetchCommentReplies = ({ parentCommentId }) => (dispatch) => {
+  dispatch({ type: COMMENT_REPLIES_LOADING });
+  axios
+    .get(`${backend_uri}/getCommentReplies/${parentCommentId}`, {}, config)
+    .then((res) => {
+      dispatch({
+        type: COMMENT_REPLIES_LOADED,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: COMMENT_REPLIES_ERROR,
+      });
+    });
+};
+
+export const replyComment = ({ comment, replyTo_commentId, repliedTo }) => (
+  dispatch,
+  getState
+) => {
+  const userId = getState().auth.user._id;
+  const body = JSON.stringify({
+    comment,
+    replyTo_commentId,
+    repliedTo,
+    userId,
+  });
+  axios
+    .patch(`${backend_uri}/replyComment`, body, tokenConfig(getState))
+    .then((res) => {
+      // console.log(res);
+    })
     .catch((err) => {
       console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));

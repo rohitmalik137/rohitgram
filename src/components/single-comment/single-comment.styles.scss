@@ -1,6 +1,3 @@
-li {
-  list-style: none;
-}
 .singleCommentContainer--avatarContainer {
   margin-right: 1%;
   .singleCommentContainer--avatar {
@@ -8,6 +5,9 @@ li {
     height: 32px;
     border-radius: 50%;
   }
+}
+.replied {
+  padding-left: 52px !important;
 }
 .singleCommentContainer {
   display: flex;
