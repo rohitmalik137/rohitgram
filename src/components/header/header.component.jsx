@@ -20,8 +20,13 @@ const Header = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const dispatch = useDispatch();
 
+  const toggleTheme = useSelector((state) => state.toggle.toggleTheme);
+
   const dummyUrl = useSelector((state) => state.auth.user);
   const imgSrc = dummyUrl ? dummyUrl.profileUrl : null;
+
+  let domain = 'http://localhost:3000/';
+  let mainUrl = domain + imgSrc;
 
   const [searchValue, setSearchValue] = useState('');
   // console.log(windowWidth);
@@ -42,7 +47,16 @@ const Header = () => {
         return (
           <div className="headerContainer-mobile">
             <div className="headerContainer-mobile--header">
-              <Navbar bg="light" style={{ padding: '1px 5px' }}>
+              <Navbar
+                bg={`${
+                  toggleTheme
+                    ? toggleTheme === 'light'
+                      ? 'light'
+                      : 'dark'
+                    : 'light'
+                }`}
+                style={{ padding: '1px 5px' }}
+              >
                 <div className="container">
                   <Navbar.Brand>
                     <Link to="/" className="headerBrand">
@@ -55,19 +69,29 @@ const Header = () => {
                       onChange={(event) => setSearchValue(event.target.value)}
                       type="text"
                       placeholder="Search"
+                      className="search-box overall"
                     />
                     <Search searchValue={searchValue} />
                   </Form>
                   <Nav className="ml-auto">
                     <Link to="/direct/inbox" className="ml-3">
-                      <i className="fa fa-paper-plane" aria-hidden="true"></i>
+                      <i className="fa fa-paper-plane-o" aria-hidden="true"></i>
                     </Link>
                   </Nav>
                 </div>
               </Navbar>
             </div>
             <div className="headerContainer-mobile--footer">
-              <Navbar bg="light" style={{ padding: '5px' }}>
+              <Navbar
+                bg={`${
+                  toggleTheme
+                    ? toggleTheme === 'light'
+                      ? 'light'
+                      : 'dark'
+                    : 'light'
+                }`}
+                style={{ padding: '5px' }}
+              >
                 <div className="container">
                   <Link to="/" className="ml-3">
                     <i className="fa fa-home" aria-hidden="true"></i>
@@ -80,11 +104,11 @@ const Header = () => {
                     <i className="fa fa-plus-square" aria-hidden="true"></i>
                   </div>
                   <Link to="/" className="ml-3">
-                    <i className="fa fa-heart" aria-hidden="true"></i>
+                    <i className="fa fa-heart-o" aria-hidden="true"></i>
                   </Link>
                   <Link to={`/${dummyUrl ? dummyUrl.username : null}`}>
                     <img
-                      src={imgSrc ? imgSrc : userAvatar}
+                      src={imgSrc ? mainUrl : userAvatar}
                       alt="avatar"
                       className="headerContainer--avatar"
                     />
@@ -96,8 +120,16 @@ const Header = () => {
         );
       case 'bigger':
         return (
-          <div className="headerContainer">
-            <Navbar bg="light">
+          <div className="headerContainer overall">
+            <Navbar
+              bg={`${
+                toggleTheme
+                  ? toggleTheme === 'light'
+                    ? 'light'
+                    : 'dark'
+                  : 'light'
+              }`}
+            >
               <div className="container">
                 <Navbar.Brand>
                   <Link to="/" className="headerBrand">
@@ -110,34 +142,32 @@ const Header = () => {
                     onChange={(event) => setSearchValue(event.target.value)}
                     type="text"
                     placeholder="Search"
+                    className="search-box overall"
                   />
                   <Search searchValue={searchValue} />
                 </Form>
                 <Nav className="ml-auto">
                   <Link to="/" className="ml-3">
-                    <i className="fa fa-home fa-2x" aria-hidden="true"></i>
+                    <i className="fa fa-home" aria-hidden="true"></i>
                   </Link>
                   <Link to="/direct/inbox" className="ml-3">
                     <i
-                      className="fa fa-paper-plane fa-2x"
+                      className="fa fa-paper-plane-o fa-2x"
                       aria-hidden="true"
                     ></i>
                   </Link>
                   <Link to="/explore" className="ml-3">
-                    <i
-                      className="fa fa-map-marker fa-2x"
-                      aria-hidden="true"
-                    ></i>
+                    <i className="fa fa-map-marker" aria-hidden="true"></i>
                   </Link>
                   <Link to="/" className="ml-3">
-                    <i className="fa fa-heart fa-2x" aria-hidden="true"></i>
+                    <i className="fa fa-heart-o" aria-hidden="true"></i>
                   </Link>
                   <div
                     className="ml-3"
                     onClick={(event) => dispatch(toggleDropdown())}
                   >
                     <img
-                      src={imgSrc ? imgSrc : userAvatar}
+                      src={imgSrc ? mainUrl : userAvatar}
                       alt="avatar"
                       className="headerContainer--avatar"
                     />

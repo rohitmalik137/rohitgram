@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { returnErrors } from './error.actions';
+import openSocket from 'socket.io-client';
 import {
   GET_POSTS,
   GET_ALL_POSTS,
@@ -26,6 +27,8 @@ const config = {
   },
 };
 
+const socket = openSocket(backend_uri);
+
 export const userPosts = ({ username }) => (dispatch) => {
   dispatch({ type: POSTS_LOADING });
   // const body = JSON.stringify({ username });
@@ -49,6 +52,16 @@ export const userPosts = ({ username }) => (dispatch) => {
         type: POSTS_FETCHING_FAIL,
       });
     });
+
+    socket.on('userPosts', data => {
+      console.log(data);
+      if(data.action === 'getUserPosts'){
+        dispatch({
+          type: GET_POSTS,
+          payload: data,
+        });
+      }
+    })
 };
 
 export const allPosts = () => (dispatch) => {
@@ -74,6 +87,14 @@ export const allPosts = () => (dispatch) => {
         type: POSTS_FETCHING_FAIL,
       });
     });
+  socket.on('posts', data => {
+    if(data.action === 'create'){
+      dispatch({
+        type: GET_ALL_POSTS,
+        payload: data.post,
+      });
+    }
+  })
 };
 
 export const singlePost = ({ postId }) => (dispatch) => {
@@ -82,7 +103,6 @@ export const singlePost = ({ postId }) => (dispatch) => {
   axios
     .get(`${backend_uri}/singlePost/${postId}`, config)
     .then((res) => {
-      console.log(res);
       dispatch({
         type: SINGLE_POST_LOADED,
         payload: res.data,
@@ -94,6 +114,36 @@ export const singlePost = ({ postId }) => (dispatch) => {
         type: SINGLE_POST_FETCHING_FAIL,
       });
     });
+
+    socket.on('likesUpdated', data => {
+      console.log(data);
+      if(data.action === 'updateLikes'){
+        dispatch({
+          type: SINGLE_POST_LOADED,
+          payload: data,
+        });
+      }
+    })
+
+    socket.on('addComment', data => {
+      console.log(data);
+      if(data.action === 'commentAdded'){
+        dispatch({
+          type: SINGLE_POST_LOADED,
+          payload: data,
+        });
+      }
+    })
+
+    socket.on('likeToggleComment', data => {
+      console.log(data);
+      if(data.action === 'likeToggleComment'){
+        dispatch({
+          type: SINGLE_POST_LOADED,
+          payload: data,
+        });
+      }
+    })
 };
 
 export const likeToggle = ({ postId }) => (dispatch, getState) => {
@@ -119,22 +169,16 @@ export const likeToggle = ({ postId }) => (dispatch, getState) => {
     });
 };
 
-export const commentLikeToggle = ({ commentId }) => (dispatch, getState) => {
+export const commentLikeToggle = ({ commentId, postId }) => (dispatch, getState) => {
   dispatch({ type: LIKE_TOGGLE_LOADING });
   const username = getState().auth.user.username;
-  const body = JSON.stringify({ username, commentId });
+  const body = JSON.stringify({ username, commentId, postId });
 
   // console.log(username, commentId);
 
   axios
     .patch(`${backend_uri}/likeCommentToggle`, body, tokenConfig(getState))
-    .then((res) => {
-      // console.log(res);
-      // dispatch({
-      //   type: LIKE_TOGGLE,
-      //   payload: res.data,
-      // });
-    })
+    .then()
     .catch((err) => {
       console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));
@@ -164,12 +208,20 @@ export const repliedCommentLikeToggle = ({ commentId, parentCommentId }) => (
       });
     })
     .catch((err) => {
-      console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: LIKE_TOGGLE_ERROR,
       });
     });
+
+    socket.on('likeToggleRepliedComment', data => {
+      if(data.action === 'likeToggleRepliedComment'){
+        dispatch({
+          type: COMMENT_REPLIES_LOADED,
+          payload: data.data,
+        });
+      }
+    })
 };
 
 export const addComment = ({ comment, postId }) => (dispatch, getState) => {
@@ -197,6 +249,16 @@ export const fetchCommentReplies = ({ parentCommentId }) => (dispatch) => {
         type: COMMENT_REPLIES_LOADED,
         payload: res.data,
       });
+
+      socket.on('repliedComment', data => {
+        if(data.action === 'commentReplied'){
+          dispatch({
+            type: COMMENT_REPLIES_LOADED,
+            payload: data.data,
+          });
+        }
+      })
+
     })
     .catch((err) => {
       console.log(err);
@@ -220,9 +282,7 @@ export const replyComment = ({ comment, replyTo_commentId, repliedTo }) => (
   });
   axios
     .patch(`${backend_uri}/replyComment`, body, tokenConfig(getState))
-    .then((res) => {
-      // console.log(res);
-    })
+    .then()
     .catch((err) => {
       console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));

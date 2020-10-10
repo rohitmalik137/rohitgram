@@ -7,14 +7,13 @@ import './posts.styles.scss';
 
 const Posts = () => {
   const userPosts = useSelector((state) => state.post.userPosts);
-  console.log(userPosts);
 
   const allPosts = userPosts ? userPosts.userPosts : null;
-  // console.log(allPosts);
   return (
     <div className="postsContainer">
-      {allPosts
-        ? allPosts.map((post) => {
+      {allPosts ? (
+        allPosts.length > 0 ? (
+          allPosts.map((post) => {
             return (
               <Link
                 to={`/p/${post._id}`}
@@ -25,7 +24,12 @@ const Posts = () => {
               </Link>
             );
           })
-        : null}
+        ) : (
+          <div className="noPosts">
+            <h3>No Posts Yet!</h3>
+          </div>
+        )
+      ) : null}
     </div>
   );
 };

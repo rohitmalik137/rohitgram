@@ -12,13 +12,13 @@ const Stories = () => {
   const username = user ? user.username : null;
 
   return (
-    <div className="storiesContainer">
+    <div className="storiesContainer overall">
       <div className="single-story" onClick={() => dispatch(toggleUploader())}>
         {profileUrl ? (
           <img src={profileUrl} alt="" />
         ) : (
           <i
-            className="fa fa-user-circle-o fa-5x"
+            className="fa fa-user-circle-o fa-5x storiesAvatar"
             aria-hidden="true"
             style={{ cursor: 'pointer' }}
           ></i>

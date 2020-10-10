@@ -77,7 +77,7 @@ const Uploader = () => {
         <Modal.Body>
           <div className="form-group preview">{imgPreview}</div>
           <div className="form-group">
-            <div id="fileInputButton" onClick={getFile}>
+            <div id="fileInputButton" className="overall" onClick={getFile}>
               click to upload a file
             </div>
             <Input
@@ -90,7 +90,7 @@ const Uploader = () => {
           </div>
           <textarea
             name="caption"
-            className="uploaderContainer--textarea"
+            className="uploaderContainer--textarea overall"
             onChange={(event) => setCaption(event.target.value)}
             placeholder="Add caption..."
           ></textarea>

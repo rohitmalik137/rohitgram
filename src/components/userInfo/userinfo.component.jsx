@@ -6,6 +6,7 @@ import { Button, Modal } from 'react-bootstrap';
 import './userinfo.styles.scss';
 import { loadUser, logout } from '../../redux/actions/auth.actions';
 import { updateFollow, updateUnfollow } from '../../redux/actions/user.actions';
+import { toggleTheme } from '../../redux/actions/toggle.actions';
 
 const UserInfo = () => {
   const [show, setShow] = useState(false);
@@ -16,8 +17,14 @@ const UserInfo = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const authUser = user ? user.username : null;
+  console.log(authUser);
   const userInformation = useSelector((state) => state.user.userInfo);
+  console.log(userInformation);
   const { username } = useParams();
+  console.log(
+    userInformation ? userInformation.followers.includes(authUser) : null
+  );
 
   useEffect(() => {
     dispatch(loadUser());
@@ -63,21 +70,23 @@ const UserInfo = () => {
                 )}
               </span>
             </div>
-            {user.following.includes(username) ? (
-              <Button onClick={unfollow} className="btn btn-secondary ml-3">
-                Following
-              </Button>
-            ) : username === user.username ? (
-              <Fragment>
-                <Link to="accounts/edit" className="button">
-                  Edit Profile
-                </Link>
-              </Fragment>
-            ) : (
-              <Button onClick={follow} className="btn btn-primary ml-3">
-                Follow
-              </Button>
-            )}
+            {userInformation ? (
+              userInformation.followers.includes(authUser) ? (
+                <Button onClick={unfollow} className="btn btn-secondary ml-3">
+                  Following
+                </Button>
+              ) : username === user.username ? (
+                <Fragment>
+                  <Link to="accounts/edit" className="button">
+                    Edit Profile
+                  </Link>
+                </Fragment>
+              ) : (
+                <Button onClick={follow} className="btn btn-primary ml-3">
+                  Follow
+                </Button>
+              )
+            ) : null}
           </div>
         );
       case 'bigger':
@@ -87,7 +96,7 @@ const UserInfo = () => {
             <div style={{ fontSize: 'larger' }}>
               {userInformation ? userInformation.username : 'loading'}
             </div>
-            {user.following.includes(username) ? (
+            {userInformation && userInformation.followers.includes(authUser) ? (
               <Button
                 onClick={unfollow}
                 className="btn btn-secondary ml-3 pr-3"
@@ -121,15 +130,20 @@ const UserInfo = () => {
     <>
       {windowWidth > 640 ? renderView('bigger') : renderView('smaller')}
       <Modal show={show} onHide={handleClose} centered className="userSettings">
-        <div className="userSettings--section">Change Password</div>
-        <div className="userSettings--section">Dark Theme/ Light Theme</div>
+        <div className="userSettings--section hoverable">Change Password</div>
+        <div
+          className="userSettings--section hoverable"
+          onClick={() => dispatch(toggleTheme())}
+        >
+          Dark Theme/ Light Theme
+        </div>
         <div
           onClick={() => dispatch(logout())}
-          className="userSettings--section"
+          className="userSettings--section hoverable"
         >
           Log Out
         </div>
-        <div onClick={handleClose} className="userSettings--section">
+        <div onClick={handleClose} className="userSettings--section hoverable">
           {' '}
           Cancel
         </div>

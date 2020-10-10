@@ -32,7 +32,7 @@ const CommentReplyModal = ({ replyTo, commentId, postId }) => {
     <div className="commentReplyContainer">
       <form onSubmit={postComment} style={{ display: 'flex' }}>
         <textarea
-          className="commentReplyContainer-input"
+          className="commentReplyContainer-input overall"
           type="text"
           placeholder={`Reply to ${replyTo}...`}
           onChange={(event) => setComment(event.target.value)}

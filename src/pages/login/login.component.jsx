@@ -22,7 +22,7 @@ const LoginPage = () => {
 
   return (
     <div className="loginContainer">
-      <div className="loginContainer--upper">
+      <div className="loginContainer--upper overall">
         <h1 className="login-heading">Rohitgram</h1>
         <form onSubmit={handleSubmit}>
           <Input
@@ -46,8 +46,8 @@ const LoginPage = () => {
         </form>
         <p>Forgot Password?</p>
       </div>
-      <div className="loginContainer--lower">
-        <p>
+      <div className="loginContainer--lower overall">
+        <p style={{ color: 'skyblue' }}>
           Don't have an account? <Link to="/accounts/signup">Sign up</Link>
         </p>
       </div>

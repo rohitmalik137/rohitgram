@@ -16,9 +16,9 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const { username } = useParams();
   // console.log(match.params.username);
-  dispatch(userInfo({ username }));
   useEffect(() => {
     dispatch(userPosts({ username }));
+    dispatch(userInfo({ username }));
     const updateDimensions = () => {
       let windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
       setWindowWidth(windowWidth);
@@ -40,7 +40,9 @@ const ProfilePage = () => {
               </div>
             </div>
             <BioInfo />
+            <hr className="overall" />
             <SocialInfo />
+            <hr className="overall" />
             <Posts />
           </div>
         );
@@ -58,6 +60,7 @@ const ProfilePage = () => {
                 <BioInfo />
               </div>
             </div>
+            <hr className="overall" />
             <Posts />
           </div>
         );

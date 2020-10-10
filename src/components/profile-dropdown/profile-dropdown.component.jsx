@@ -43,7 +43,7 @@ const ProfileDropdown = () => {
               dispatch(toggleDropdown());
               // history.push(`/${username}`);
             }}
-            className="profile-dropdown__div"
+            className="profile-dropdown__div hoverable"
           >
             <i
               className="fa fa-user-circle-o profile-dropdown--icon"
@@ -51,14 +51,14 @@ const ProfileDropdown = () => {
             ></i>
             <span>Profile</span>
           </Link>
-          <div className="profile-dropdown__div">
+          <div className="profile-dropdown__div hoverable">
             <i
               className="fa fa-bookmark-o profile-dropdown--icon"
               aria-hidden="true"
             ></i>
             <span>Saved</span>
           </div>
-          <div className="profile-dropdown__div">
+          <div className="profile-dropdown__div hoverable">
             <i
               className="fa fa-cog profile-dropdown--icon"
               aria-hidden="true"
@@ -68,7 +68,7 @@ const ProfileDropdown = () => {
           <hr />
           <div
             onClick={() => dispatch(logout())}
-            className="profile-dropdown__div"
+            className="profile-dropdown__div hoverable"
           >
             Log Out
           </div>

@@ -24,7 +24,7 @@ const SignupPage = () => {
 
   return (
     <div className="loginContainer">
-      <div className="loginContainer--upper">
+      <div className="loginContainer--upper overall">
         <h1 className="login-heading">Rohitgram</h1>
         <form onSubmit={handleSubmit}>
           <Input
@@ -53,8 +53,8 @@ const SignupPage = () => {
           />
         </form>
       </div>
-      <div className="loginContainer--lower">
-        <p>
+      <div className="loginContainer--lower overall">
+        <p style={{ color: 'skyblue' }}>
           Have an account? <Link to="/">Log In</Link>
         </p>
       </div>

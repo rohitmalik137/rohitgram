@@ -1,5 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React, { useState, Fragment, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './App.css';
@@ -14,10 +19,19 @@ import EditPage from './pages/edit/edit.component';
 import SinglePostPage from './pages/single-post/single-post.component';
 import { loadUser } from './redux/actions/auth.actions';
 
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from './components/globalStyles';
+import { lightTheme, darkTheme } from './components/Themes';
+
 const App = () => {
+  // const [isAUth, setIsAUth] = useState(window.localStorage.getItem('token'));
+  // console.log(isAUth);
+
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   // const isLoading = useSelector((state) => state.auth.isLoading);
+
+  const toggleTheme = useSelector((state) => state.toggle.toggleTheme);
 
   let routes;
   useEffect(() => {
@@ -26,7 +40,7 @@ const App = () => {
 
   isAuthenticated
     ? (routes = (
-        <div className="App">
+        <Router className="App">
           <Header />
           <Switch>
             <Route exact path="/" component={HomePage} />
@@ -37,19 +51,34 @@ const App = () => {
             <Route exact path="/p/:postId" component={SinglePostPage} />
             <Redirect to="/" />
           </Switch>
-        </div>
+        </Router>
       ))
     : (routes = (
-        <div className="App">
+        <Router className="App">
           <Switch>
             <Route exact path="/" component={LoginPage} />
             <Route exact path="/accounts/signup" component={SignupPage} />
             <Redirect to="/" />
           </Switch>
-        </div>
+        </Router>
       ));
 
-  return <Fragment>{routes}</Fragment>;
+  return (
+    <ThemeProvider
+      theme={
+        toggleTheme
+          ? toggleTheme === 'light'
+            ? lightTheme
+            : darkTheme
+          : lightTheme
+      }
+    >
+      <>
+        <GlobalStyles />
+        <Fragment>{routes}</Fragment>
+      </>
+    </ThemeProvider>
+  );
 };
 
 export default App;

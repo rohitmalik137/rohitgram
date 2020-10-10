@@ -8,12 +8,27 @@ import SinglePostFooter from '../single-post-footer/single-post-footer.component
 
 const AllPosts = () => {
   const posts = useSelector((state) => state.post.allPosts);
+  const user = useSelector((state) => state.auth.user);
+
+  const filtered =
+    posts &&
+    posts
+      .filter(
+        (data) =>
+          user.following.includes(data.userId.username) ||
+          data.userId.username === user.username
+      )
+      .filter((data) => !data.likes.includes(user.username));
+
+  console.log(filtered);
+
   // console.log(posts);
 
   return (
     <div className="allPostsContainer">
-      {posts
-        ? posts.map((post) => {
+      {posts ? (
+        filtered.length > 0 ? (
+          filtered.map((post) => {
             return (
               <div className="allPostsContainer--singlepost" key={post._id}>
                 <SinglePostHeader
@@ -25,7 +40,12 @@ const AllPosts = () => {
               </div>
             );
           })
-        : null}
+        ) : (
+          <div className="blankMsg">
+            No more posts! Follow other users to see their latest posts here!
+          </div>
+        )
+      ) : null}
     </div>
   );
 };

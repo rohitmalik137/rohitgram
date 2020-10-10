@@ -5,6 +5,7 @@ import {
   HIDE_DROPDOWN,
   TOGGLE_COMMENT_REPLY_BOX,
   TOGGLE_COMMENT_REPLIES,
+  TOGGLE_THEME,
 } from './types';
 
 export const toggleDropdown = () => (dispatch) => {
@@ -29,4 +30,8 @@ export const toggleCommentReplyBox = (commentId = null) => (dispatch) => {
 
 export const toggleCommentReplies = (commentId = null) => (dispatch) => {
   dispatch({ type: TOGGLE_COMMENT_REPLIES, payload: commentId });
+};
+
+export const toggleTheme = () => (dispatch) => {
+  dispatch({ type: TOGGLE_THEME });
 };

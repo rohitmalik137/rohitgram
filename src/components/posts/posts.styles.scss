@@ -1,6 +1,6 @@
 .postsContainer {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   padding: 0;
 
   .postsContainer--card {
@@ -8,6 +8,14 @@
     height: 293px;
     margin: 10px;
     padding: 0;
+  }
+
+  .noPosts {
+    width: 70vw;
+    margin: 25px auto;
+    padding-top: 25%;
+    text-align: center;
+    height: 30vh;
   }
 }
 
@@ -19,6 +27,10 @@
       width: 30vw;
       height: 30vw;
       margin: 10px auto;
+    }
+
+    .noPosts {
+      width: 100vw;
     }
   }
 }

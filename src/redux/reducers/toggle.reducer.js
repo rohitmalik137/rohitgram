@@ -5,6 +5,7 @@ import {
   HIDE_DROPDOWN,
   TOGGLE_COMMENT_REPLY_BOX,
   TOGGLE_COMMENT_REPLIES,
+  TOGGLE_THEME,
 } from '../actions/types';
 const INITIAL_STATE = {
   isHidden: false,
@@ -14,6 +15,7 @@ const INITIAL_STATE = {
   toggleCOmmentReplyId: null,
   toggleCommentReplies: false,
   toggleCommentRepliesId: null,
+  toggleTheme: window.localStorage.getItem('theme'),
 };
 
 const toggleReducer = (state = INITIAL_STATE, action) => {
@@ -49,6 +51,16 @@ const toggleReducer = (state = INITIAL_STATE, action) => {
         ...state,
         toggleCommentReplies: !state.toggleCommentReplies,
         toggleCommentRepliesId: action.payload,
+      };
+    case TOGGLE_THEME:
+      state.toggleTheme
+        ? state.toggleTheme === 'light'
+          ? window.localStorage.setItem('theme', 'dark')
+          : window.localStorage.setItem('theme', 'light')
+        : window.localStorage.setItem('theme', 'dark');
+      return {
+        ...state,
+        toggleTheme: window.localStorage.getItem('theme'),
       };
     default:
       return state;

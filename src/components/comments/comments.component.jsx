@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import './comments.styles.scss';
 import SingleComment from '../single-comment/single-comment.component';
@@ -16,14 +16,13 @@ const Comments = ({ comments }) => {
   );
 
   const replies = useSelector((state) => state.post.commentReplies);
-  console.log(replies);
 
   return (
     <div className="commentsContainer">
-      {comments.length ? (
+      {comments && comments.length ? (
         comments.map((comment) => {
           return (
-            <>
+            <Fragment key={comment._id}>
               <SingleComment comment={comment} key={comment._id} />
               <div
                 className="commentsHideNShow"
@@ -53,7 +52,6 @@ const Comments = ({ comments }) => {
                     replies
                       .filter((reply) => reply.userId !== undefined)
                       .map((subcomment) => {
-                        console.log(subcomment.userId);
                         return (
                           <>
                             <SingleComment
@@ -74,7 +72,7 @@ const Comments = ({ comments }) => {
                   <span>Loading...</span>
                 )
               ) : null}
-            </>
+            </Fragment>
           );
         })
       ) : (

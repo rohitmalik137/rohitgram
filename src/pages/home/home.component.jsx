@@ -9,7 +9,7 @@ import AllPosts from '../../components/all-posts/all-posts.component';
 import { allPosts } from '../../redux/actions/post.actions';
 
 const HomePage = () => {
-  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const dispatch = useDispatch();
 
   useEffect(() => {

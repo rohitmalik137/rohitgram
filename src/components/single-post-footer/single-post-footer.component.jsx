@@ -5,13 +5,13 @@ import { Link, useHistory } from 'react-router-dom';
 import './single-post-footer.styles.scss';
 import {
   likeToggle,
-  allPosts,
   addComment,
   singlePost,
 } from '../../redux/actions/post.actions';
 import { Modal } from 'react-bootstrap';
 
 const SinglePostFooter = ({ post, sidebar }) => {
+  const [liked, setLiked] = useState(false);
   const history = useHistory();
   const [comment, setComment] = useState('');
   const [show, setShow] = useState(false);
@@ -26,7 +26,8 @@ const SinglePostFooter = ({ post, sidebar }) => {
 
   const likeToggleFunc = () => {
     dispatch(likeToggle({ postId }));
-    dispatch(allPosts());
+    dispatch(singlePost({ postId }));
+    setLiked((prevState) => !prevState);
   };
 
   const postComment = (e) => {
@@ -39,12 +40,30 @@ const SinglePostFooter = ({ post, sidebar }) => {
   return (
     <>
       <div
-        className={`${sidebar ? 'sidebar' : null} SinglePostFooterContainer `}
+        className={`${
+          sidebar ? 'sidebar' : null
+        } SinglePostFooterContainer overall `}
       >
         <div className="SinglePostFooterContainer--header">
-          {post.likes &&
-          post.likes.length > 0 &&
-          post.likes.includes(username) ? (
+          {sidebar ? (
+            post.likes &&
+            post.likes.length > 0 &&
+            post.likes.includes(username) ? (
+              <i
+                onClick={likeToggleFunc}
+                style={{ color: 'red' }}
+                className="fa fa-heart fa-2x SinglePostFooterContainer--icon"
+                aria-hidden="true"
+              ></i>
+            ) : (
+              <i
+                onClick={likeToggleFunc}
+                style={{ color: 'red' }}
+                className="fa fa-heart-o fa-2x SinglePostFooterContainer--icon"
+                aria-hidden="true"
+              ></i>
+            )
+          ) : liked ? (
             <i
               onClick={likeToggleFunc}
               style={{ color: 'red' }}
@@ -73,33 +92,44 @@ const SinglePostFooter = ({ post, sidebar }) => {
             aria-hidden="true"
           ></i>
           <div>
-            {post.likes.length ? (
-              post.likes.length === 1 ? (
-                <strong onClick={handleShow} style={{ cursor: 'pointer' }}>
-                  1 Like
-                </strong>
-              ) : (
-                <span>
-                  Liked by &nbsp;
-                  <Link to={`/${post.likes[0]}`} style={{ color: 'black' }}>
-                    <strong style={{ cursor: 'pointer' }}>
-                      {post.likes[0]}
-                    </strong>
-                  </Link>
-                  &nbsp; and &nbsp;
+            {sidebar ? (
+              post.likes.length ? (
+                post.likes.length === 1 ? (
                   <strong onClick={handleShow} style={{ cursor: 'pointer' }}>
-                    {post.likes.length - 1} others
+                    1 Like
                   </strong>
-                </span>
-              )
+                ) : (
+                  <span>
+                    Liked by &nbsp;
+                    <Link to={`/${post.likes[0]}`} style={{ color: 'black' }}>
+                      <strong style={{ cursor: 'pointer' }}>
+                        {post.likes[0]}
+                      </strong>
+                    </Link>
+                    &nbsp; and &nbsp;
+                    <strong onClick={handleShow} style={{ cursor: 'pointer' }}>
+                      {post.likes.length - 1} others
+                    </strong>
+                  </span>
+                )
+              ) : null
+            ) : liked ? (
+              <strong onClick={handleShow} style={{ cursor: 'pointer' }}>
+                {post.likes.length + 1} likes
+              </strong>
+            ) : post.likes.length > 0 ? (
+              <strong onClick={handleShow} style={{ cursor: 'pointer' }}>
+                {post.likes.length} likes
+              </strong>
             ) : null}
           </div>
           <div>
-            <strong>
-              <Link to={`/${post.userId.username}`}>
-                {post.userId.username}
-              </Link>
-            </strong>
+            <Link
+              style={{ fontWeight: 'bold' }}
+              to={`/${post.userId.username}`}
+            >
+              {post.userId.username}
+            </Link>
             &nbsp;
             <span>{post.caption}</span>
           </div>
@@ -179,7 +209,7 @@ const SinglePostFooter = ({ post, sidebar }) => {
         <div className="SinglePostFooterContainer--footer">
           <form onSubmit={postComment}>
             <input
-              className="SinglePostFooterContainer--footer-input"
+              className="SinglePostFooterContainer--footer-input overall"
               type="text"
               placeholder="Add a comment..."
               onChange={(event) => setComment(event.target.value)}
@@ -233,6 +263,28 @@ const SinglePostFooter = ({ post, sidebar }) => {
               </div>
             );
           })}
+          {liked ? (
+            <div
+              style={{
+                marginBottom: '5px',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <Link
+                style={{ color: 'gray', marginRight: '10px' }}
+                to={`/${username}`}
+                className="singleCommentContainer--avatarContainer"
+              >
+                <i className="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+              </Link>
+              <Link style={{ color: 'gray' }} to={`/${username}`}>
+                <strong className="singleCommentContainer--username">
+                  {username}
+                </strong>
+              </Link>
+            </div>
+          ) : null}
         </Modal.Body>
       </Modal>
     </>

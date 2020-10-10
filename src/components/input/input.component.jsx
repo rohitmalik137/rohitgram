@@ -6,7 +6,7 @@ const Input = ({ isButton, ...otherProps }) => {
   return (
     <div className="group">
       <input
-        className={`${isButton ? 'formButton' : ''} form-input `}
+        className={`${isButton ? 'formButton' : ''} form-input overall`}
         {...otherProps}
       />
     </div>

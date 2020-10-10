@@ -13,9 +13,8 @@ $button-background: #1b76ec;
   }
 
   .form-input {
-    background: none;
-    background-color: $input-background;
-    color: $main-color;
+    background-color: transparent;
+    color: $sub-color;
     font-size: 15px;
     padding: 10px;
     display: block;
@@ -27,6 +26,7 @@ $button-background: #1b76ec;
 
     &:focus {
       outline: none;
+      background: transparent;
     }
   }
 }

@@ -7,7 +7,7 @@ import SingleSearch from '../single-search/single-search.component';
 const Search = ({ searchValue }) => {
   const usersList = useSelector((state) => state.user.users);
   return (
-    <div className="searchContainer">
+    <div className="searchContainer overall">
       {searchValue.length
         ? usersList
             .filter((user) => {
@@ -16,7 +16,14 @@ const Search = ({ searchValue }) => {
                 .includes(searchValue.toLowerCase());
             })
             .map((user) => {
-              return <SingleSearch key={user._id} username={user.username} />;
+              return (
+                <SingleSearch
+                  key={user._id}
+                  profileUrl={user.profileUrl}
+                  username={user.username}
+                  searched="true"
+                />
+              );
             })
         : null}
     </div>

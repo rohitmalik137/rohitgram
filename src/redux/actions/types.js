@@ -1,6 +1,6 @@
 export const GET_ALL_POSTS = 'GET_ALL_POSTS';
 
-export const GET_POSTS = 'GET_TASKS';
+export const GET_POSTS = 'GET_POSTS';
 export const POSTS_LOADING = 'POSTS_LOADING';
 export const ADD_POST = 'ADD_TASK';
 export const POSTS_FETCHING_FAIL = 'POSTS_FETCHING_FAIL';
@@ -30,6 +30,7 @@ export const TOGGLE_SEARCH = 'TOGGLE_SEARCH';
 export const TOGGLE_UPLOADER = 'TOGGLE_UPLOADER';
 export const TOGGLE_COMMENT_REPLY_BOX = 'TOGGLE_COMMENT_REPLY_BOX';
 export const TOGGLE_COMMENT_REPLIES = 'TOGGLE_COMMENT_REPLIES';
+export const TOGGLE_THEME = 'TOGGLE_THEME';
 
 export const USER_LOADING = 'USER_LOADING';
 export const USER_LOADED = 'USER_LOADED';

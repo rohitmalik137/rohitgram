@@ -6,6 +6,11 @@
   z-index: 10;
   width: 100vw;
 
+  .fa {
+    // border: 1px solid black;
+    font-size: x-large;
+  }
+
   .headerContainer--search {
     position: relative;
   }
@@ -42,8 +47,8 @@
 // }
 
 .headerContainer--avatar {
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border: 1px solid gray;
   border-radius: 50%;
 }
@@ -51,4 +56,17 @@
 .headerBrand {
   font-family: 'Oleo Script', cursive;
   font-size: larger;
+}
+
+.search-box {
+  text-align: center;
+  width: 65%;
+  height: 70%;
+  margin: auto;
+  color: #969696;
+  background: transparent;
+
+  &:focus {
+    background: transparent;
+  }
 }

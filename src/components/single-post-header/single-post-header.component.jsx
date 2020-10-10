@@ -8,7 +8,7 @@ const SinglePostHeader = ({ profileUrl, username }) => {
   let mainUrl = domain + profileUrl;
 
   return (
-    <div className="singlePostHeaderContainer">
+    <div className="singlePostHeaderContainer overall">
       <Link
         to={`/${username}`}
         className="singleCommentContainer--avatarContainer"

@@ -10,12 +10,10 @@ import {
   commentLikeToggle,
   repliedCommentLikeToggle,
   singlePost,
-  fetchCommentReplies,
 } from '../../redux/actions/post.actions';
 import { toggleCommentReplyBox } from '../../redux/actions/toggle.actions';
 
 const SingleComment = ({ comment, replied, parentId }) => {
-  console.log(comment);
   const dispatch = useDispatch();
   const { postId } = useParams();
 
@@ -38,7 +36,7 @@ const SingleComment = ({ comment, replied, parentId }) => {
 
   const toggleCommentLike = () => {
     console.log(comment._id);
-    dispatch(commentLikeToggle({ commentId: comment._id }));
+    dispatch(commentLikeToggle({ commentId: comment._id, postId }));
     dispatch(singlePost({ postId }));
   };
   const toggleRepliedCommentLike = () => {
