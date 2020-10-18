@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { returnErrors } from './error.actions';
 import { tokenConfig } from './auth.actions';
+import openSocket from 'socket.io-client';
 import {
   GET_USERS,
   USERS_LOADING,
@@ -20,6 +21,8 @@ const config = {
     'Content-type': 'application/json',
   },
 };
+
+const socket = openSocket(backend_uri);
 
 export const usersList = () => (dispatch) => {
   dispatch({ type: USERS_LOADING });
@@ -57,6 +60,24 @@ export const userInfo = ({ username }) => (dispatch) => {
         type: USER_INFO_FETCHING_FAIL,
       });
     });
+
+    socket.on('updateFollow', data => {
+      if(data.action === 'updateFollow'){
+        dispatch({
+          type: PROFILE_LOADED,
+          payload: data.data,
+        });
+      }
+    })
+
+    socket.on('updateUnfollow', data => {
+      if(data.action === 'updateUnfollow'){
+        dispatch({
+          type: PROFILE_LOADED,
+          payload: data.data,
+        });
+      }
+    })
 };
 
 export const updateFollow = ({ followedUser }) => (dispatch, getState) => {
@@ -80,11 +101,19 @@ export const updateFollow = ({ followedUser }) => (dispatch, getState) => {
         type: PROFILE_LOADING_FAIL,
       });
     });
+
+    socket.on('updateFollow', data => {
+      if(data.action === 'updateFollow'){
+        dispatch({
+          type: PROFILE_LOADED,
+          payload: data.data,
+        });
+      }
+    })
 };
 
 export const updateUnfollow = ({ followedUser }) => (dispatch, getState) => {
   const username = getState().auth.user.username;
-  console.log(username);
   const body = JSON.stringify({ username, followedUser });
   dispatch({ type: PROFILE_LOADING });
 
@@ -104,6 +133,15 @@ export const updateUnfollow = ({ followedUser }) => (dispatch, getState) => {
         type: PROFILE_LOADING_FAIL,
       });
     });
+
+    socket.on('updateUnfollow', data => {
+      if(data.action === 'updateUnfollow'){
+        dispatch({
+          type: PROFILE_LOADED,
+          payload: data.data,
+        });
+      }
+    })
 };
 
 export const updateProfile = ({ formData }) => (dispatch, getState) => {

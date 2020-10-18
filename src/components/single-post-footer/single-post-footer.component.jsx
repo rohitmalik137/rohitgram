@@ -123,16 +123,18 @@ const SinglePostFooter = ({ post, sidebar }) => {
               </strong>
             ) : null}
           </div>
-          <div>
-            <Link
-              style={{ fontWeight: 'bold' }}
-              to={`/${post.userId.username}`}
-            >
-              {post.userId.username}
-            </Link>
-            &nbsp;
-            <span>{post.caption}</span>
-          </div>
+          {post.caption && post.caption !== 'null' && (
+            <div>
+              <Link
+                style={{ fontWeight: 'bold' }}
+                to={`/${post.userId.username}`}
+              >
+                {post.userId.username}
+              </Link>
+              &nbsp;
+              <span>{post.caption}</span>
+            </div>
+          )}
           <div>
             <Link to={`/p/${post._id}`}>View all comments</Link>
           </div>
@@ -239,23 +241,15 @@ const SinglePostFooter = ({ post, sidebar }) => {
               >
                 <Link
                   style={{ color: 'gray', marginRight: '10px' }}
-                  to={`/${post.userId.username}`}
+                  to={`/${user}`}
                   className="singleCommentContainer--avatarContainer"
                 >
-                  {/* {comment.userId.profileUrl ? (
-                    <img
-                      src={mainUrl}
-                      className="singleCommentContainer--avatar"
-                      alt="avatar"
-                    />
-                  ) : ( */}
                   <i
                     className="fa fa-user-circle-o fa-2x"
                     aria-hidden="true"
                   ></i>
-                  {/* )} */}
                 </Link>
-                <Link style={{ color: 'gray' }} to={`/${post.userId.username}`}>
+                <Link style={{ color: 'gray' }} to={`/${user}`}>
                   <strong className="singleCommentContainer--username">
                     {user}
                   </strong>

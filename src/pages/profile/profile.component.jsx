@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { userPosts } from '../../redux/actions/post.actions';
 import { userInfo } from '../../redux/actions/user.actions';
@@ -9,21 +9,27 @@ import UserInfo from '../../components/userInfo/userinfo.component';
 import Posts from '../../components/posts/posts.component';
 import SocialInfo from '../../components/userInfo/socialInfo/socialInfo.component';
 import BioInfo from '../../components/userInfo/bioInfo/bioInfo.component';
+import NotFoundPage from '../404/404.component';
 import './profile.styles.scss';
 
 const ProfilePage = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const dispatch = useDispatch();
   const { username } = useParams();
-  // console.log(match.params.username);
+  const users = useSelector((state) => state.user.users);
+
   useEffect(() => {
     dispatch(userPosts({ username }));
     dispatch(userInfo({ username }));
+    let isMounted = true;
     const updateDimensions = () => {
       let windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
-      setWindowWidth(windowWidth);
+      if (isMounted) setWindowWidth(windowWidth);
     };
     window.addEventListener('resize', updateDimensions);
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch, username]);
 
   const renderView = (args) => {
@@ -66,9 +72,19 @@ const ProfilePage = () => {
         );
     }
   };
-
+  const isUserExists = users.filter((user) => user.username === username);
   return (
-    <>{windowWidth > 640 ? renderView('bigger') : renderView('smaller')}</>
+    <>
+      {isUserExists.length > 0 ? (
+        windowWidth > 640 ? (
+          renderView('bigger')
+        ) : (
+          renderView('smaller')
+        )
+      ) : (
+        <NotFoundPage />
+      )}
+    </>
   );
 };
 

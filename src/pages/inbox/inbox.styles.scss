@@ -1,0 +1,50 @@
+.inboxPageContainer {
+  width: 900px;
+  height: 80vh;
+  margin: auto;
+  //   border: 1px solid rgb(204, 203, 203);
+  margin-top: 92px;
+  display: flex;
+  position: relative;
+
+  .inboxPage-left {
+    border: 1px solid rgb(204, 203, 203);
+    width: 300px;
+    min-width: 300px;
+    overflow: auto;
+
+    .inboxPage-left__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: large;
+      border: 1px solid rgb(204, 203, 203);
+      padding: 12.5px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .inboxPageContainer {
+    width: 90vw;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .inboxPageContainer {
+    margin-top: 62px;
+    width: 100vw;
+    height: 90vh;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .inboxPageContainer {
+    margin-top: 47px;
+
+    .inboxPage-left {
+      width: 100vw !important;
+    }
+  }
+}

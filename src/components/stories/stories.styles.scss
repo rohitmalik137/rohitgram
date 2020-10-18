@@ -22,21 +22,12 @@
       height: 75px;
       border-radius: 50%;
     }
-
-    // .plus-icon {
-    //   position: absolute;
-    //   bottom: 20%;
-    //   right: 10%;
-    //   color: rgb(72, 151, 255);
-    //   padding: 3px;
-    //   // font-size: larger;
-    // }
   }
 }
 
 @media only screen and (max-width: 640px) {
   .storiesContainer {
-    margin: 10px 0;
+    margin: 3px 0;
     height: 100px;
     width: 100vw;
     max-width: 100%;
@@ -53,14 +44,6 @@
       .storiesAvatar {
         font-size: 56px;
       }
-
-      // .plus-icon {
-      //   position: absolute;
-      //   bottom: 40%;
-      //   right: 10%;
-      //   padding: 3px;
-      //   // font-size: larger;
-      // }
     }
   }
 }

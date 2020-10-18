@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import authReducer from './reducers/auth.reducer';
+import chatReducer from './reducers/chat.reducer';
 import errorReducer from './reducers/error.reducer';
 import postReducer from './reducers/post.reducer';
 import toggleReducer from './reducers/toggle.reducer';
@@ -18,6 +19,7 @@ export default combineReducers({
   post: postReducer,
   toggle: toggleReducer,
   user: userReducer,
+  chat: chatReducer,
 });
 
 // export default persistReducer(persistConfig, rootReducer);

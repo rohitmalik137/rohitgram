@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { toggleCommentReplyBox } from '../../../redux/actions/toggle.actions';
 import {
   replyComment,
-  singlePost,
   fetchCommentReplies,
 } from '../../../redux/actions/post.actions';
 import './comment-reply-modal.styles.scss';
@@ -24,7 +23,6 @@ const CommentReplyModal = ({ replyTo, commentId, postId }) => {
       })
     );
     dispatch(toggleCommentReplyBox());
-    // dispatch(singlePost({ postId }));
     dispatch(fetchCommentReplies({ parentCommentId: commentId }));
   };
 

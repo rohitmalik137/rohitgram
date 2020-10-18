@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './login.styles.scss';
 import Input from '../../components/input/input.component';
-import { login } from '../../redux/actions/auth.actions';
+import { loadUser, login } from '../../redux/actions/auth.actions';
+import { clearErrors } from '../../redux/actions/error.actions';
 
 const LoginPage = () => {
   const dispatch = useDispatch();
+  const errors = useSelector((state) => state.error.msg);
+  const msg = errors && errors.msg;
   const [uname_or_email, setUnameOrEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const loginUser = {
       uname_or_email,
@@ -24,6 +27,7 @@ const LoginPage = () => {
     <div className="loginContainer">
       <div className="loginContainer--upper overall">
         <h1 className="login-heading">Rohitgram</h1>
+        {msg && <div className="error">{msg}</div>}
         <form onSubmit={handleSubmit}>
           <Input
             type="text"
@@ -48,7 +52,10 @@ const LoginPage = () => {
       </div>
       <div className="loginContainer--lower overall">
         <p style={{ color: 'skyblue' }}>
-          Don't have an account? <Link to="/accounts/signup">Sign up</Link>
+          Don't have an account?{' '}
+          <Link to="/accounts/signup" onClick={() => dispatch(clearErrors())}>
+            Sign up
+          </Link>
         </p>
       </div>
     </div>

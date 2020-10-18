@@ -54,7 +54,6 @@ export const userPosts = ({ username }) => (dispatch) => {
     });
 
     socket.on('userPosts', data => {
-      console.log(data);
       if(data.action === 'getUserPosts'){
         dispatch({
           type: GET_POSTS,
@@ -116,7 +115,6 @@ export const singlePost = ({ postId }) => (dispatch) => {
     });
 
     socket.on('likesUpdated', data => {
-      console.log(data);
       if(data.action === 'updateLikes'){
         dispatch({
           type: SINGLE_POST_LOADED,
@@ -126,7 +124,6 @@ export const singlePost = ({ postId }) => (dispatch) => {
     })
 
     socket.on('addComment', data => {
-      console.log(data);
       if(data.action === 'commentAdded'){
         dispatch({
           type: SINGLE_POST_LOADED,
@@ -136,7 +133,6 @@ export const singlePost = ({ postId }) => (dispatch) => {
     })
 
     socket.on('likeToggleComment', data => {
-      console.log(data);
       if(data.action === 'likeToggleComment'){
         dispatch({
           type: SINGLE_POST_LOADED,
@@ -154,14 +150,12 @@ export const likeToggle = ({ postId }) => (dispatch, getState) => {
   axios
     .patch(`${backend_uri}/updateLikes`, body, tokenConfig(getState))
     .then((res) => {
-      console.log(res);
       dispatch({
         type: LIKE_TOGGLE,
         payload: res.data,
       });
     })
     .catch((err) => {
-      console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: LIKE_TOGGLE_ERROR,
@@ -180,7 +174,6 @@ export const commentLikeToggle = ({ commentId, postId }) => (dispatch, getState)
     .patch(`${backend_uri}/likeCommentToggle`, body, tokenConfig(getState))
     .then()
     .catch((err) => {
-      console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: LIKE_TOGGLE_ERROR,
@@ -232,7 +225,6 @@ export const addComment = ({ comment, postId }) => (dispatch, getState) => {
     .patch(`${backend_uri}/addComment`, body, tokenConfig(getState))
     .then(() => {})
     .catch((err) => {
-      console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: COMMENT_ERROR,
@@ -261,7 +253,6 @@ export const fetchCommentReplies = ({ parentCommentId }) => (dispatch) => {
 
     })
     .catch((err) => {
-      console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: COMMENT_REPLIES_ERROR,
@@ -284,7 +275,6 @@ export const replyComment = ({ comment, replyTo_commentId, repliedTo }) => (
     .patch(`${backend_uri}/replyComment`, body, tokenConfig(getState))
     .then()
     .catch((err) => {
-      console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: COMMENT_ERROR,

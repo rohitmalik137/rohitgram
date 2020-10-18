@@ -22,20 +22,28 @@ import { loadUser } from './redux/actions/auth.actions';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './components/globalStyles';
 import { lightTheme, darkTheme } from './components/Themes';
+import { usersList } from './redux/actions/user.actions';
+import Chat from './components/chat/chat.component';
 
 const App = () => {
-  // const [isAUth, setIsAUth] = useState(window.localStorage.getItem('token'));
-  // console.log(isAUth);
-
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  // const isLoading = useSelector((state) => state.auth.isLoading);
-
   const toggleTheme = useSelector((state) => state.toggle.toggleTheme);
 
   let routes;
   useEffect(() => {
     dispatch(loadUser());
+    dispatch(usersList());
+    let isMounted = true;
+    const updateDimensions = () => {
+      let windowWidth = typeof window !== 'undefined' ? window.innerWidth : 0;
+      if (isMounted) setWindowWidth(windowWidth);
+    };
+    window.addEventListener('resize', updateDimensions);
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch]);
 
   isAuthenticated
@@ -45,6 +53,11 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/direct/inbox" component={InboxPage} />
+            <Route
+              exact
+              path="/direct/:chatId"
+              component={windowWidth > 640 ? InboxPage : Chat}
+            />
             <Route exact path="/explore" component={ExplorePage} />
             <Route exact path="/:username" component={ProfilePage} />
             <Route exact path="/accounts/edit" component={EditPage} />
@@ -55,11 +68,15 @@ const App = () => {
       ))
     : (routes = (
         <Router className="App">
-          <Switch>
-            <Route exact path="/" component={LoginPage} />
-            <Route exact path="/accounts/signup" component={SignupPage} />
-            <Redirect to="/" />
-          </Switch>
+          <Header />
+          <div className="notAuth">
+            <Switch>
+              <Route exact path="/" component={LoginPage} />
+              <Route exact path="/:username" component={ProfilePage} />
+              <Route exact path="/accounts/signup" component={SignupPage} />
+              <Redirect to="/" />
+            </Switch>
+          </div>
         </Router>
       ));
 

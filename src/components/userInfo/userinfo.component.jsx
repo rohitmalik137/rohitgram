@@ -18,13 +18,9 @@ const UserInfo = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const authUser = user ? user.username : null;
-  console.log(authUser);
   const userInformation = useSelector((state) => state.user.userInfo);
-  console.log(userInformation);
   const { username } = useParams();
-  console.log(
-    userInformation ? userInformation.followers.includes(authUser) : null
-  );
+  const isAUthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     dispatch(loadUser());
@@ -59,30 +55,36 @@ const UserInfo = () => {
             <div style={{ fontSize: 'x-large' }}>
               {userInformation ? userInformation.username : 'loading'}
               <span className="ml-3">
-                {username === user.username ? (
-                  <i
-                    className="fa fa-cog"
-                    onClick={handleShow}
-                    aria-hidden="true"
-                  ></i>
-                ) : (
-                  <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                )}
+                {isAUthenticated ? (
+                  username === user.username ? (
+                    <i
+                      className="fa fa-cog"
+                      onClick={handleShow}
+                      aria-hidden="true"
+                    ></i>
+                  ) : (
+                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                  )
+                ) : null}
               </span>
             </div>
             {userInformation ? (
               userInformation.followers.includes(authUser) ? (
-                <Button onClick={unfollow} className="btn btn-secondary ml-3">
+                <Button onClick={unfollow} className="btn btn-secondary mr-3">
                   Following
                 </Button>
-              ) : username === user.username ? (
+              ) : isAUthenticated && username === user.username ? (
                 <Fragment>
                   <Link to="accounts/edit" className="button">
                     Edit Profile
                   </Link>
                 </Fragment>
               ) : (
-                <Button onClick={follow} className="btn btn-primary ml-3">
+                <Button
+                  disabled={!isAUthenticated}
+                  onClick={follow}
+                  className="btn btn-primary mr-3"
+                >
                   Follow
                 </Button>
               )
@@ -103,7 +105,7 @@ const UserInfo = () => {
               >
                 Following
               </Button>
-            ) : username === user.username ? (
+            ) : isAUthenticated && username === user.username ? (
               <Fragment>
                 <Link to="accounts/edit" className="ml-3 button">
                   Edit Profile
@@ -117,7 +119,11 @@ const UserInfo = () => {
                 </div>
               </Fragment>
             ) : (
-              <Button onClick={follow} className="btn btn-primary ml-3 pr-3">
+              <Button
+                disabled={!isAUthenticated}
+                onClick={follow}
+                className="btn btn-primary ml-3 pr-3"
+              >
                 Follow
               </Button>
             )}

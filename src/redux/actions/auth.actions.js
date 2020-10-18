@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { returnErrors } from './error.actions';
+import { returnErrors, clearErrors } from './error.actions';
 import {
   USER_LOADED,
   USER_LOADING,
@@ -20,17 +20,19 @@ export const loadUser = () => (dispatch, getState) => {
 
   axios
     .get(`${backend_uri}/auth/user`, tokenConfig(getState))
-    .then((res) =>
+    .then((res) => {
       dispatch({
         type: USER_LOADED,
         payload: res.data,
-      })
-    )
+      });
+      dispatch(clearErrors());
+    })
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: AUTH_ERROR,
       });
+      dispatch(clearErrors());
     });
 };
 
@@ -47,12 +49,11 @@ export const register = ({ username, email, password }) => (dispatch) => {
   axios
     .post(`${backend_uri}/auth/signup`, body, config)
     .then((res) => {
-      console.log(res);
-      console.log(res);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+      dispatch(clearErrors());
     })
     .catch((err) => {
       dispatch(
@@ -83,6 +84,7 @@ export const login = ({ uname_or_email, password }) => (dispatch) => {
         type: LOGIN_SUCCESS,
         payload: res.data,
       });
+      dispatch(clearErrors());
     })
     .catch((err) => {
       dispatch(

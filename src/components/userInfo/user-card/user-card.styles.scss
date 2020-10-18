@@ -1,0 +1,17 @@
+.userCardCOntainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 7.5px;
+
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-left: 20px;
+  }
+  .chatHeader {
+    width: 30px;
+    height: 30px;
+  }
+}

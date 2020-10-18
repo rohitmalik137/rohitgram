@@ -1,0 +1,23 @@
+.messagesContainer {
+  position: absolute;
+  top: 53px;
+  right: 0;
+  left: 0;
+  bottom: 53px;
+
+  .scrollable-screen {
+    overflow: auto;
+    height: 100%;
+  }
+
+  .messagesContainer-message {
+    display: flex;
+    align-items: center;
+  }
+  .sender {
+    justify-content: flex-end;
+  }
+  .receiver {
+    justify-content: flex-start;
+  }
+}

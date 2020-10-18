@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
@@ -9,7 +9,7 @@ import {
 import { logout } from '../../redux/actions/auth.actions';
 import './profile-dropdown.styles.scss';
 
-function useOutsideAlerter(ref) {
+const useOutsideAlerter = (ref) => {
   const dispatch = useDispatch();
   useEffect(() => {
     function handleClickOutside(event) {
@@ -22,9 +22,10 @@ function useOutsideAlerter(ref) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref, dispatch]);
-}
+};
 
 const ProfileDropdown = () => {
+  const history = useHistory();
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
   const dispatch = useDispatch();
@@ -37,11 +38,11 @@ const ProfileDropdown = () => {
     <div ref={wrapperRef}>
       {toggle ? (
         <div className="profile-dropdown">
-          <Link
+          <div
             to={`/${username}`}
             onClick={() => {
               dispatch(toggleDropdown());
-              // history.push(`/${username}`);
+              history.push(`/${username}`);
             }}
             className="profile-dropdown__div hoverable"
           >
@@ -50,7 +51,7 @@ const ProfileDropdown = () => {
               aria-hidden="true"
             ></i>
             <span>Profile</span>
-          </Link>
+          </div>
           <div className="profile-dropdown__div hoverable">
             <i
               className="fa fa-bookmark-o profile-dropdown--icon"
@@ -67,7 +68,10 @@ const ProfileDropdown = () => {
           </div>
           <hr />
           <div
-            onClick={() => dispatch(logout())}
+            onClick={() => {
+              dispatch(logout());
+              dispatch(toggleDropdown());
+            }}
             className="profile-dropdown__div hoverable"
           >
             Log Out

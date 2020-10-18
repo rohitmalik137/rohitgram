@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { updateFollow, usersList } from '../../redux/actions/user.actions';
+import UserCard from '../userInfo/user-card/user-card.component';
 
 import './suggested.styles.scss';
 
@@ -20,28 +21,7 @@ const Suggested = () => {
 
   return (
     <div className="suggestedContainer">
-      <div
-        className="suggested--upper"
-        onClick={() => history.push(`/${username}`)}
-      >
-        {profileUrl ? (
-          <img src={profileUrl} style={{ marginLeft: '20px' }} alt="" />
-        ) : (
-          <i
-            className="fa fa-user-circle-o"
-            aria-hidden="true"
-            style={{
-              cursor: 'pointer',
-              marginLeft: '20px',
-              fontSize: '56px',
-            }}
-          ></i>
-        )}
-        <span style={{ marginLeft: '15px', fontSize: 'small' }}>
-          <div style={{ fontWeight: 'bold' }}>{username}</div>
-          <div>User Name</div>
-        </span>
-      </div>
+      <UserCard username={username} profileUrl={profileUrl} />
       <div className="suggested--lower overall">
         <div className="suggested--lower_header">
           <p>Suggested For you</p>

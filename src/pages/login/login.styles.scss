@@ -1,11 +1,20 @@
 .loginContainer {
   width: 450px;
-  margin: 25px auto;
+  margin: 75px auto;
   text-align: center;
 
   .loginContainer--upper {
     border: 1px solid #cacaca;
     margin-bottom: 25px;
+
+    .error {
+      display: block;
+      background-color: rgb(252, 180, 180);
+      border: 1px solid red;
+      color: #777;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
 
     .login-heading {
       font-family: 'Oleo Script', cursive;

@@ -7,12 +7,14 @@ import Stories from '../../components/stories/stories.component';
 import Suggested from '../../components/suggested/suggested.component';
 import AllPosts from '../../components/all-posts/all-posts.component';
 import { allPosts } from '../../redux/actions/post.actions';
+import { loadUser } from '../../redux/actions/auth.actions';
 
 const HomePage = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(loadUser());
     dispatch(allPosts());
     let isMounted = true;
     const updateDimensions = () => {

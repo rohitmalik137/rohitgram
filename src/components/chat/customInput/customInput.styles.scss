@@ -1,0 +1,63 @@
+.emoji-mart {
+  width: 100% !important;
+  background-color: #252526;
+}
+.emoji-mart-category-label span {
+  background-color: #252526;
+  color: #999999;
+}
+.emoji-bar {
+  position: absolute;
+  bottom: 55px;
+  left: 0;
+}
+
+.form {
+  display: flex;
+  border: 1px solid #515152;
+  margin: auto;
+  margin-bottom: 10px;
+  border-radius: 40px;
+  height: 40px;
+  width: 95%;
+
+  .emoji-icon {
+    display: flex;
+    padding-left: 15px;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .input {
+    border: none;
+    outline: none;
+    border-radius: 0;
+    background-color: transparent !important;
+    padding-left: 20px;
+    width: 85%;
+    height: 35px;
+    font-size: 1em;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+  }
+
+  .send {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #2979ff;
+    cursor: pointer;
+    padding: 2px;
+    display: inline-block;
+    padding-top: auto;
+    margin: auto 10px;
+    border: none;
+    border-radius: 20px;
+    width: 75px;
+    height: 30px;
+  }
+}

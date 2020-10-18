@@ -20,10 +20,6 @@ const AllPosts = () => {
       )
       .filter((data) => !data.likes.includes(user.username));
 
-  console.log(filtered);
-
-  // console.log(posts);
-
   return (
     <div className="allPostsContainer">
       {posts ? (
