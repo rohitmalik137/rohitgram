@@ -10,10 +10,20 @@ import Messages from './messages/messages.component';
 
 const Chat = () => {
   const { chatId } = useParams();
+  const chat = useSelector((state) => state.chat.chat);
   const userList = useSelector((state) => state.user.users);
   const authUser = useSelector((state) => state.auth.user);
+  const authUsername = authUser ? authUser.username : null;
   const authUserId = authUser ? authUser._id : null;
   const id_array = chatId && chatId.split('_');
+
+  const isBlocked =
+    chat && chat.blocked.filter((user) => user === authUsername);
+
+  const userWhoBlocked =
+    chat && chat.blocked.filter((user) => user !== authUsername);
+
+  let userTypingFor;
 
   const renderView = (args) => {
     switch (args) {
@@ -29,19 +39,31 @@ const Chat = () => {
                       (id_array[1] === authUserId ? id_array[0] : id_array[1])
                   )
                   .map((user) => {
+                    userTypingFor = user.username;
                     return (
                       <UserCard
                         username={user.username}
                         profileUrl={user.profileUrl}
                         key={user._id}
                         chatHeader="true"
+                        otherUserIsBlocked={
+                          userWhoBlocked && userWhoBlocked.length > 0
+                            ? 'true'
+                            : null
+                        }
                       />
                     );
                   })}
             </div>
             <Messages />
             <div className="chatContainer-footer">
-              <CustomInput />
+              {isBlocked && isBlocked.length > 0 ? (
+                <p className="chatContainer-footer-blocked">
+                  You can't reply to this conversation!!
+                </p>
+              ) : (
+                <CustomInput userTypingFor={userTypingFor} />
+              )}
             </div>
           </>
         );

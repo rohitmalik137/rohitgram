@@ -4,10 +4,14 @@ import { Picker } from 'emoji-mart';
 
 import './customInput.styles.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { sendMessage, getMessages } from '../../../redux/actions/chat.actions';
+import {
+  sendMessage,
+  getMessages,
+  isTyping,
+} from '../../../redux/actions/chat.actions';
 import { useParams } from 'react-router-dom';
 
-const CustomInput = () => {
+const CustomInput = ({ userTypingFor }) => {
   const { chatId } = useParams();
   const dispatch = useDispatch();
   const [showEmojis, setShowEmojis] = useState(false);
@@ -31,6 +35,14 @@ const CustomInput = () => {
     let emoji = e.native;
     setInputText(inputText + emoji);
   };
+
+  const typing = () => {
+    dispatch(isTyping({ user: authUsername, userTypingFor, isTyping: true }));
+  };
+
+  const notTyping = () => {
+    dispatch(isTyping({ user: null, userTypingFor: null, isTyping: false }));
+  };
   return (
     <>
       {showEmojis ? (
@@ -45,6 +57,8 @@ const CustomInput = () => {
           aria-hidden="true"
         ></i>
         <input
+          onFocus={typing}
+          onBlur={notTyping}
           className="input overall"
           type="text"
           placeholder="type a message..."

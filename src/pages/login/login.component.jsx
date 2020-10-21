@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './login.styles.scss';
 import Input from '../../components/input/input.component';
-import { loadUser, login } from '../../redux/actions/auth.actions';
+import { login } from '../../redux/actions/auth.actions';
 import { clearErrors } from '../../redux/actions/error.actions';
 
 const LoginPage = () => {

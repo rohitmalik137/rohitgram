@@ -8,6 +8,11 @@
   max-width: 50%;
 }
 
+.message-ellipsis {
+  margin: 5px;
+  padding: 2px;
+}
+
 @media only screen and (max-width: 420px) {
   .messageContainer {
     max-width: 70%;
