@@ -67,7 +67,7 @@ const Message = ({ user, message, sentAt, sender, msgId }) => {
         </div>
         <div
           onClick={copyToClipBoard}
-          style={{ cursor: 'pointer' }}
+          style={{ cursor: 'copy' }}
           className="avatarContainer--header"
         >
           {' '}

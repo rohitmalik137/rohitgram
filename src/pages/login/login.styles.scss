@@ -20,6 +20,14 @@
       font-family: 'Oleo Script', cursive;
       padding: 25px;
     }
+
+    .loginContainer--options {
+      cursor: pointer;
+
+      &:hover {
+        color: skyblue;
+      }
+    }
   }
   .loginContainer--lower {
     border: 1px solid #cacaca;

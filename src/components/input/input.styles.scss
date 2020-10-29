@@ -11,7 +11,10 @@ $button-background: #1b76ec;
     color: white !important;
     margin: 10px auto !important;
   }
-
+  .buttonDisabled {
+    background-color: #84b9ff !important;
+    cursor: no-drop;
+  }
   .form-input {
     background-color: transparent;
     color: $sub-color;

@@ -9,9 +9,17 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  PASSWORD_RESET_SUCCESS,
 } from './types';
 
 const backend_uri = 'http://localhost:7000';
+
+//headers
+const config = {
+  headers: {
+    'Content-type': 'application/json',
+  },
+};
 
 //check token and load user
 export const loadUser = () => (dispatch, getState) => {
@@ -38,23 +46,11 @@ export const loadUser = () => (dispatch, getState) => {
 
 // Register User
 export const register = ({ username, email, password }) => (dispatch) => {
-  //headers
-  const config = {
-    headers: {
-      'Content-type': 'application/json',
-    },
-  };
   //Request Body
   const body = JSON.stringify({ username, email, password });
   axios
     .post(`${backend_uri}/auth/signup`, body, config)
-    .then((res) => {
-      dispatch({
-        type: REGISTER_SUCCESS,
-        payload: res.data,
-      });
-      dispatch(clearErrors());
-    })
+    .then()
     .catch((err) => {
       dispatch(
         returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
@@ -67,13 +63,6 @@ export const register = ({ username, email, password }) => (dispatch) => {
 
 // Login User
 export const login = ({ uname_or_email, password }) => (dispatch) => {
-  // Headers
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
   // Request body
   const body = JSON.stringify({ uname_or_email, password });
 
@@ -93,6 +82,63 @@ export const login = ({ uname_or_email, password }) => (dispatch) => {
       dispatch({
         type: LOGIN_FAIL,
       });
+    });
+};
+
+export const verifyUser = ({ token }) => (dispatch) => {
+  axios
+    .post(`${backend_uri}/auth/emailVerification/${token}`, {}, config)
+    .then((res) => {
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+      dispatch(clearErrors());
+    })
+    .catch((err) => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL')
+      );
+    });
+};
+
+export const verifyUserAfterAccountCreation = ({ mailForVerification }) => (
+  dispatch
+) => {
+  dispatch(clearErrors());
+  const body = JSON.stringify({ mailForVerification });
+  axios
+    .patch(`${backend_uri}/auth/verifyUserAfterAccountCreation`, body, config)
+    .then((res) => {})
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+export const getResetPassword = ({ mailForForgotPassword }) => (dispatch) => {
+  dispatch(clearErrors());
+  const body = JSON.stringify({ mailForForgotPassword });
+  axios
+    .patch(`${backend_uri}/auth/getEmailToResetPassword`, body, config)
+    .then((res) => {})
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+export const postResetPassword = ({ email, otp, npassword }) => (dispatch) => {
+  dispatch(clearErrors());
+  const body = JSON.stringify({ email, otp, npassword });
+  axios
+    .patch(`${backend_uri}/auth/postResetPassword`, body, config)
+    .then((res) => {
+      dispatch({
+        type: PASSWORD_RESET_SUCCESS,
+        payload: res.data.msg,
+      });
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
 

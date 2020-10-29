@@ -7,12 +7,14 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  PASSWORD_RESET_SUCCESS,
 } from '../actions/types';
 
 const INITIAL_STATE = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
   isLoading: null,
+  passResetSuccess: null,
   user: Object,
 };
 
@@ -23,11 +25,17 @@ const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isLoading: true,
       };
+    case PASSWORD_RESET_SUCCESS:
+      return {
+        ...state,
+        passResetSuccess: action.payload,
+      };
     case USER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
         isLoading: false,
+        passResetSuccess: null,
         user: action.payload,
       };
     case LOGIN_SUCCESS:
@@ -38,19 +46,20 @@ const authReducer = (state = INITIAL_STATE, action) => {
         ...action.payload,
         isAuthenticated: true,
         isLoading: false,
+        passResetSuccess: null,
       };
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
     case REGISTER_FAIL:
       localStorage.removeItem('token');
-      // localStorage.removeItem('userId');
       return {
         ...state,
         token: null,
         user: null,
         isAuthenticated: false,
         isLoading: false,
+        passResetSuccess: null,
       };
     default:
       return state;

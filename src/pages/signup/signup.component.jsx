@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import '../login/login.styles.scss';
@@ -9,13 +9,19 @@ import { clearErrors } from '../../redux/actions/error.actions';
 
 const SignupPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const errors = useSelector((state) => state.error.msg);
   const msg = errors && errors.msg;
   const [email, setEmail] = useState(null);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
+  useEffect(() => {
+    dispatch(clearErrors());
+  }, [dispatch]);
+
   const handleSubmit = async (event) => {
+    history.push('/accounts/verify');
     event.preventDefault();
     const newUser = {
       email: email,
@@ -50,8 +56,10 @@ const SignupPage = () => {
             onChange={(event) => setPassword(event.target.value)}
           />
           <Input
+            disabled={!email || !username || !password}
             type="submit"
             value="Sign Up"
+            name="submit"
             isButton
             onChange={(event) => setPassword(event.target.value)}
           />

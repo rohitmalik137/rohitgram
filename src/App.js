@@ -24,6 +24,9 @@ import { GlobalStyles } from './components/globalStyles';
 import { lightTheme, darkTheme } from './components/Themes';
 import { usersList } from './redux/actions/user.actions';
 import Chat from './components/chat/chat.component';
+import VerificationSentPage from './pages/accountVerify/verificationSent.component';
+import VerifiedPage from './pages/accountVerify/verified.component';
+import ResetPasswordPage from './pages/resetPassword/resetPassword.component';
 
 const App = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -62,6 +65,11 @@ const App = () => {
             <Route exact path="/:username" component={ProfilePage} />
             <Route exact path="/accounts/edit" component={EditPage} />
             <Route exact path="/p/:postId" component={SinglePostPage} />
+            <Route
+              exact
+              path="/accounts/verified/:token/someveryrandomstringofnouse"
+              component={VerifiedPage}
+            />
             <Redirect to="/" />
           </Switch>
         </Router>
@@ -74,6 +82,21 @@ const App = () => {
               <Route exact path="/" component={LoginPage} />
               <Route exact path="/:username" component={ProfilePage} />
               <Route exact path="/accounts/signup" component={SignupPage} />
+              <Route
+                exact
+                path="/accounts/resetPassword/:email"
+                component={ResetPasswordPage}
+              />
+              <Route
+                exact
+                path="/accounts/verify"
+                component={VerificationSentPage}
+              />
+              <Route
+                exact
+                path="/accounts/verified/:token/someveryrandomstringofnouse"
+                component={VerifiedPage}
+              />
               <Redirect to="/" />
             </Switch>
           </div>
