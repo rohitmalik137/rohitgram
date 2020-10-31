@@ -31,9 +31,10 @@ const Messages = () => {
               >
                 <Message
                   key={message._id}
-                  user={message.user}
                   message={message.message}
                   sentAt={message.sentAt}
+                  likes={message.likes}
+                  currentUser={authUsername}
                   sender={authUsername === message.user ? 'sender' : 'receiver'}
                   msgId={message._id}
                 />

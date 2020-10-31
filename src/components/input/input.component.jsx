@@ -23,6 +23,7 @@ const Input = ({ isButton, name, type, value, disabled, ...otherProps }) => {
         <input
           type={type}
           name={name}
+          value={value}
           className="form-input overall"
           {...otherProps}
           // ref={register({ required: true, maxLength: 10 })}

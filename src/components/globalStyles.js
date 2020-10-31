@@ -25,6 +25,11 @@ export const GlobalStyles = createGlobalStyle`
       }
     }
 
+    .active{
+      background: ${({ theme }) => theme.active} !important;
+      color: ${({ theme }) => theme.text} !important;
+    }
+
     .modal-content{
       background: ${({ theme }) => theme.modal};
       color: ${({ theme }) => theme.text} !important;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { Button, Modal } from 'react-bootstrap';
 
 import './userinfo.styles.scss';
@@ -10,6 +10,7 @@ import { toggleTheme } from '../../redux/actions/toggle.actions';
 
 const UserInfo = () => {
   const [show, setShow] = useState(false);
+  const history = useHistory();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -136,7 +137,14 @@ const UserInfo = () => {
     <>
       {windowWidth > 640 ? renderView('bigger') : renderView('smaller')}
       <Modal show={show} onHide={handleClose} centered className="userSettings">
-        <div className="userSettings--section hoverable">Change Password</div>
+        <div
+          onClick={() => {
+            history.push('/accounts/edit/password');
+          }}
+          className="userSettings--section hoverable"
+        >
+          Change Password
+        </div>
         <div
           className="userSettings--section hoverable"
           onClick={() => dispatch(toggleTheme())}

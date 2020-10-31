@@ -142,6 +142,28 @@ export const postResetPassword = ({ email, otp, npassword }) => (dispatch) => {
     });
 };
 
+export const changePassword = ({
+  username,
+  cpassword,
+  npassword,
+  cnpassword,
+}) => (dispatch, getState) => {
+  dispatch(clearErrors());
+  const body = JSON.stringify({ username, cpassword, npassword, cnpassword });
+  console.log(body);
+  axios
+    .patch(`${backend_uri}/auth/changePassword`, body, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: PASSWORD_RESET_SUCCESS,
+        payload: res.data.msg,
+      });
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
 export const logout = () => {
   return {
     type: LOGOUT_SUCCESS,

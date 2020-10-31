@@ -52,14 +52,26 @@ const ProfileDropdown = () => {
             ></i>
             <span>Profile</span>
           </div>
-          <div className="profile-dropdown__div hoverable">
+          <div
+            onClick={() => {
+              dispatch(toggleDropdown());
+              history.push(`/${username}`);
+            }}
+            className="profile-dropdown__div hoverable"
+          >
             <i
               className="fa fa-bookmark-o profile-dropdown--icon"
               aria-hidden="true"
             ></i>
             <span>Saved</span>
           </div>
-          <div className="profile-dropdown__div hoverable">
+          <div
+            onClick={() => {
+              dispatch(toggleDropdown());
+              history.push('/accounts/edit');
+            }}
+            className="profile-dropdown__div hoverable"
+          >
             <i
               className="fa fa-cog profile-dropdown--icon"
               aria-hidden="true"

@@ -4,9 +4,12 @@ import React, { useRef, useState } from 'react';
 import './message.styles.scss';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { unsendUserMessage } from '../../../../redux/actions/chat.actions';
+import {
+  toggleLikeSingleMessage,
+  unsendUserMessage,
+} from '../../../../redux/actions/chat.actions';
 
-const Message = ({ user, message, sentAt, sender, msgId }) => {
+const Message = ({ currentUser, message, likes, sentAt, sender, msgId }) => {
   const dispatch = useDispatch();
   const { chatId } = useParams();
   const msgTextCopy = useRef(null);
@@ -15,6 +18,11 @@ const Message = ({ user, message, sentAt, sender, msgId }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [showLikesModal, setShowLikesModal] = useState(false);
+
+  const handleCloseLikesModal = () => setShowLikesModal(false);
+  const handleShowLikesModal = () => setShowLikesModal(true);
 
   const unsendMessage = () => {
     dispatch(unsendUserMessage({ chatId, msgId }));
@@ -25,6 +33,12 @@ const Message = ({ user, message, sentAt, sender, msgId }) => {
     const selectedText = msgTextCopy.current.innerHTML;
     navigator.clipboard.writeText(selectedText);
     handleClose();
+  };
+  const toggleLikeMessage = (e) => {
+    console.log('clicked!');
+    dispatch(
+      toggleLikeSingleMessage({ chatId, msgId, userWhoLiked: currentUser })
+    );
   };
 
   return (
@@ -44,16 +58,30 @@ const Message = ({ user, message, sentAt, sender, msgId }) => {
       <div
         onMouseOver={() => setShowMessageDetails(true)}
         onMouseOut={() => setShowMessageDetails(false)}
+        onDoubleClick={toggleLikeMessage}
         className="messageContainer"
-        ref={msgTextCopy}
       >
-        {message}
+        <span ref={msgTextCopy}>{message}</span>
+        {likes.length > 0 && (
+          <span
+            className="messageContainer-like"
+            onClick={handleShowLikesModal}
+          >
+            <i
+              style={{ color: 'red' }}
+              className="fa fa-heart"
+              aria-hidden="true"
+            ></i>
+          </span>
+        )}
       </div>
       {showMessageDetails && sender === 'receiver' && (
         <span style={{ fontSize: 'x-small', pointerEvents: 'none' }}>
           {sentAt.toString().split(' GMT')[0]}
         </span>
       )}
+
+      {/* Message Options Modal */}
       <Modal
         show={show}
         onHide={handleClose}
@@ -77,6 +105,23 @@ const Message = ({ user, message, sentAt, sender, msgId }) => {
           {' '}
           Cancel
         </div>
+      </Modal>
+
+      {/* Message Likes Modal */}
+      <Modal
+        show={showLikesModal}
+        centered
+        size="sm"
+        onHide={handleCloseLikesModal}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Liked by</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {likes.map((user) => {
+            return <p>{user}</p>;
+          })}
+        </Modal.Body>
       </Modal>
     </>
   );

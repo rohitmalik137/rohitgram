@@ -63,6 +63,11 @@ const App = () => {
             />
             <Route exact path="/explore" component={ExplorePage} />
             <Route exact path="/:username" component={ProfilePage} />
+            <Route
+              exact
+              path="/accounts/edit/:editoption"
+              component={EditPage}
+            />
             <Route exact path="/accounts/edit" component={EditPage} />
             <Route exact path="/p/:postId" component={SinglePostPage} />
             <Route

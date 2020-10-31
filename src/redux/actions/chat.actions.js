@@ -179,3 +179,30 @@ export const isTyping = (user, userTypingFor, isTyping) => (
   const body = JSON.stringify({ user, userTypingFor, isTyping });
   axios.post(`${backend_uri}/isTyping`, body, tokenConfig(getState));
 };
+
+export const toggleLikeSingleMessage = ({ chatId, msgId, userWhoLiked }) => (
+  dispatch,
+  getState
+) => {
+  const body = JSON.stringify({ chatId, msgId, userWhoLiked });
+  axios
+    .patch(`${backend_uri}/toggleLikeMessage`, body, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: CHAT_MESSAGES,
+        payload: res.data[0],
+      });
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+
+  socket.on('getChat', (data) => {
+    if (data.action === 'getChat') {
+      dispatch({
+        type: CHAT_MESSAGES,
+        payload: data.data[0],
+      });
+    }
+  });
+};

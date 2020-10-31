@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import userAvatar from '../../assets/user_-512.webp';
 import './avatar.styles.scss';
-import { updateProfile, userInfo } from '../../redux/actions/user.actions';
+import {
+  removeProfilePicture,
+  updateProfile,
+  userInfo,
+} from '../../redux/actions/user.actions';
 
 const Avatar = () => {
   const dispatch = useDispatch();
@@ -36,6 +40,11 @@ const Avatar = () => {
     setShow(false);
   };
 
+  const removeDP = (e) => {
+    dispatch(removeProfilePicture({ username: myUsername }));
+    handleClose();
+  };
+
   return (
     <>
       <div
@@ -61,7 +70,10 @@ const Avatar = () => {
           {' '}
           Upload Photo
         </div>
-        <div className="avatarContainer--remove"> Remove Current Photo</div>
+        <div onClick={removeDP} className="avatarContainer--remove">
+          {' '}
+          Remove Current Photo
+        </div>
         <div onClick={handleClose} className="avatarContainer--cancel">
           {' '}
           Cancel

@@ -1,0 +1,46 @@
+.editPageCOntainer {
+  margin: auto;
+  margin-top: 87px;
+  width: 945px;
+  height: 500px;
+  border: 1px solid #777;
+  display: flex;
+  position: relative;
+
+  .editPage-left {
+    width: 245px;
+    height: 100%;
+
+    .edit-left__options {
+      padding: 15px 25px;
+      margin: 0;
+      cursor: pointer;
+    }
+  }
+
+  .editPage-right {
+    position: absolute;
+    height: 100%;
+    left: 245px;
+    right: 0;
+  }
+}
+
+@media only screen and (max-width: 975px) {
+  .editPageCOntainer {
+    width: 90vw;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .editPageCOntainer {
+    width: 100vw;
+    margin-top: 46px;
+    margin-bottom: 40px;
+    height: 540px;
+
+    .editPage-right {
+      left: 0;
+    }
+  }
+}

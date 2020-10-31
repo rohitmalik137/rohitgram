@@ -41,7 +41,7 @@ const ResetPasswordPage = () => {
           </div>
         )}
         <form onSubmit={postResetPasswordSubmit}>
-          <Input value={email} />
+          <Input disabled={true} value={email} />
           <Input
             type="text"
             name="otp"

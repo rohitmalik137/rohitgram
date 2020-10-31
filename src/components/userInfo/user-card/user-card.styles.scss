@@ -24,6 +24,7 @@
 
 .videoPanel {
   position: absolute;
+  border: 1px solid #777;
   top: 50px;
   left: 0;
   width: 250px;
@@ -31,8 +32,13 @@
 }
 .remotevideoPanel {
   position: absolute;
+  border: 1px solid #777;
   top: 50px;
   right: 0;
   width: 250px;
   height: 250px;
+}
+.temparory {
+  position: relative;
+  z-index: 1000;
 }

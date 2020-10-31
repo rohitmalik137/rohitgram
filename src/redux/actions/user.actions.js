@@ -61,23 +61,23 @@ export const userInfo = ({ username }) => (dispatch) => {
       });
     });
 
-    socket.on('updateFollow', data => {
-      if(data.action === 'updateFollow'){
-        dispatch({
-          type: PROFILE_LOADED,
-          payload: data.data,
-        });
-      }
-    })
+  socket.on('updateFollow', (data) => {
+    if (data.action === 'updateFollow') {
+      dispatch({
+        type: PROFILE_LOADED,
+        payload: data.data,
+      });
+    }
+  });
 
-    socket.on('updateUnfollow', data => {
-      if(data.action === 'updateUnfollow'){
-        dispatch({
-          type: PROFILE_LOADED,
-          payload: data.data,
-        });
-      }
-    })
+  socket.on('updateUnfollow', (data) => {
+    if (data.action === 'updateUnfollow') {
+      dispatch({
+        type: PROFILE_LOADED,
+        payload: data.data,
+      });
+    }
+  });
 };
 
 export const updateFollow = ({ followedUser }) => (dispatch, getState) => {
@@ -102,14 +102,14 @@ export const updateFollow = ({ followedUser }) => (dispatch, getState) => {
       });
     });
 
-    socket.on('updateFollow', data => {
-      if(data.action === 'updateFollow'){
-        dispatch({
-          type: PROFILE_LOADED,
-          payload: data.data,
-        });
-      }
-    })
+  socket.on('updateFollow', (data) => {
+    if (data.action === 'updateFollow') {
+      dispatch({
+        type: PROFILE_LOADED,
+        payload: data.data,
+      });
+    }
+  });
 };
 
 export const updateUnfollow = ({ followedUser }) => (dispatch, getState) => {
@@ -134,14 +134,14 @@ export const updateUnfollow = ({ followedUser }) => (dispatch, getState) => {
       });
     });
 
-    socket.on('updateUnfollow', data => {
-      if(data.action === 'updateUnfollow'){
-        dispatch({
-          type: PROFILE_LOADED,
-          payload: data.data,
-        });
-      }
-    })
+  socket.on('updateUnfollow', (data) => {
+    if (data.action === 'updateUnfollow') {
+      dispatch({
+        type: PROFILE_LOADED,
+        payload: data.data,
+      });
+    }
+  });
 };
 
 export const updateProfile = ({ formData }) => (dispatch, getState) => {
@@ -149,6 +149,31 @@ export const updateProfile = ({ formData }) => (dispatch, getState) => {
 
   axios
     .patch(`${backend_uri}/profile`, formData, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: PROFILE_LOADED,
+        payload: res.data.data,
+      });
+    })
+    .catch((err) => {
+      dispatch(
+        returnErrors(
+          err.response.data,
+          err.response.status,
+          'PROFILE_LOADING_FAIL'
+        )
+      );
+      dispatch({
+        type: PROFILE_LOADING_FAIL,
+      });
+    });
+};
+
+export const removeProfilePicture = ({ username }) => (dispatch, getState) => {
+  dispatch({ type: PROFILE_LOADING });
+  const body = JSON.stringify({ username });
+  axios
+    .patch(`${backend_uri}/removeProfilePicture`, body, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: PROFILE_LOADED,
