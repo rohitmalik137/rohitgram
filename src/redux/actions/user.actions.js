@@ -14,7 +14,7 @@ import {
   PROFILE_LOADING_FAIL,
 } from './types';
 
-const backend_uri = 'http://localhost:7000';
+const backend_uri = process.env.REACT_APP_BACKEND_URL;
 
 const config = {
   headers: {
@@ -82,7 +82,6 @@ export const userInfo = ({ username }) => (dispatch) => {
 
 export const updateFollow = ({ followedUser }) => (dispatch, getState) => {
   const username = getState().auth.user.username;
-  console.log(username);
   const body = JSON.stringify({ username, followedUser });
 
   axios

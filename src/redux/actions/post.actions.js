@@ -19,7 +19,7 @@ import {
 } from './types';
 import { tokenConfig } from './auth.actions';
 
-const backend_uri = 'http://localhost:7000';
+const backend_uri = process.env.REACT_APP_BACKEND_URL;
 
 const config = {
   headers: {
@@ -53,14 +53,14 @@ export const userPosts = ({ username }) => (dispatch) => {
       });
     });
 
-    socket.on('userPosts', data => {
-      if(data.action === 'getUserPosts'){
-        dispatch({
-          type: GET_POSTS,
-          payload: data,
-        });
-      }
-    })
+  socket.on('userPosts', (data) => {
+    if (data.action === 'getUserPosts') {
+      dispatch({
+        type: GET_POSTS,
+        payload: data,
+      });
+    }
+  });
 };
 
 export const allPosts = () => (dispatch) => {
@@ -86,14 +86,14 @@ export const allPosts = () => (dispatch) => {
         type: POSTS_FETCHING_FAIL,
       });
     });
-  socket.on('posts', data => {
-    if(data.action === 'create'){
+  socket.on('posts', (data) => {
+    if (data.action === 'create') {
       dispatch({
         type: GET_ALL_POSTS,
         payload: data.post,
       });
     }
-  })
+  });
 };
 
 export const singlePost = ({ postId }) => (dispatch) => {
@@ -114,32 +114,32 @@ export const singlePost = ({ postId }) => (dispatch) => {
       });
     });
 
-    socket.on('likesUpdated', data => {
-      if(data.action === 'updateLikes'){
-        dispatch({
-          type: SINGLE_POST_LOADED,
-          payload: data,
-        });
-      }
-    })
+  socket.on('likesUpdated', (data) => {
+    if (data.action === 'updateLikes') {
+      dispatch({
+        type: SINGLE_POST_LOADED,
+        payload: data,
+      });
+    }
+  });
 
-    socket.on('addComment', data => {
-      if(data.action === 'commentAdded'){
-        dispatch({
-          type: SINGLE_POST_LOADED,
-          payload: data,
-        });
-      }
-    })
+  socket.on('addComment', (data) => {
+    if (data.action === 'commentAdded') {
+      dispatch({
+        type: SINGLE_POST_LOADED,
+        payload: data,
+      });
+    }
+  });
 
-    socket.on('likeToggleComment', data => {
-      if(data.action === 'likeToggleComment'){
-        dispatch({
-          type: SINGLE_POST_LOADED,
-          payload: data,
-        });
-      }
-    })
+  socket.on('likeToggleComment', (data) => {
+    if (data.action === 'likeToggleComment') {
+      dispatch({
+        type: SINGLE_POST_LOADED,
+        payload: data,
+      });
+    }
+  });
 };
 
 export const likeToggle = ({ postId }) => (dispatch, getState) => {
@@ -163,13 +163,13 @@ export const likeToggle = ({ postId }) => (dispatch, getState) => {
     });
 };
 
-export const commentLikeToggle = ({ commentId, postId }) => (dispatch, getState) => {
+export const commentLikeToggle = ({ commentId, postId }) => (
+  dispatch,
+  getState
+) => {
   dispatch({ type: LIKE_TOGGLE_LOADING });
   const username = getState().auth.user.username;
   const body = JSON.stringify({ username, commentId, postId });
-
-  // console.log(username, commentId);
-
   axios
     .patch(`${backend_uri}/likeCommentToggle`, body, tokenConfig(getState))
     .then()
@@ -207,14 +207,14 @@ export const repliedCommentLikeToggle = ({ commentId, parentCommentId }) => (
       });
     });
 
-    socket.on('likeToggleRepliedComment', data => {
-      if(data.action === 'likeToggleRepliedComment'){
-        dispatch({
-          type: COMMENT_REPLIES_LOADED,
-          payload: data.data,
-        });
-      }
-    })
+  socket.on('likeToggleRepliedComment', (data) => {
+    if (data.action === 'likeToggleRepliedComment') {
+      dispatch({
+        type: COMMENT_REPLIES_LOADED,
+        payload: data.data,
+      });
+    }
+  });
 };
 
 export const addComment = ({ comment, postId }) => (dispatch, getState) => {
@@ -242,15 +242,14 @@ export const fetchCommentReplies = ({ parentCommentId }) => (dispatch) => {
         payload: res.data,
       });
 
-      socket.on('repliedComment', data => {
-        if(data.action === 'commentReplied'){
+      socket.on('repliedComment', (data) => {
+        if (data.action === 'commentReplied') {
           dispatch({
             type: COMMENT_REPLIES_LOADED,
             payload: data.data,
           });
         }
-      })
-
+      });
     })
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));

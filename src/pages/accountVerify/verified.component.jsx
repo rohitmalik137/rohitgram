@@ -14,7 +14,6 @@ const VerifiedPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('____+++++++______');
     dispatch(verifyUser({ token }));
   }, [dispatch, token]);
   const history = useHistory();

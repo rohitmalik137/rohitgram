@@ -13,7 +13,7 @@ import {
 } from './types';
 import { tokenConfig } from './auth.actions';
 
-const backend_uri = 'http://localhost:7000';
+const backend_uri = process.env.REACT_APP_BACKEND_URL;
 const socket = openSocket(backend_uri);
 
 // Store Chat message to DB
@@ -45,7 +45,6 @@ export const sendMessage = ({ chatId, user, message }) => (
     });
 
   socket.on('postMessage', (data) => {
-    console.log(data);
     if (data.action === 'postMessage') {
       dispatch({
         type: CHAT_MESSAGES,
@@ -94,7 +93,6 @@ export const getMessages = ({ chatId }) => (dispatch, getState) => {
   });
   socket.on('isTyping', (data) => {
     if (data.action === 'isTyping') {
-      console.log(data);
       dispatch({
         type: TYPING_TOGGLE,
         payload: data,

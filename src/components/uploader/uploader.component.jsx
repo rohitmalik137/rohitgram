@@ -25,7 +25,7 @@ const Uploader = () => {
 
   const userId = user ? user._id : null;
 
-  const backend_uri = 'http://localhost:7000';
+  const backend_uri = process.env.REACT_APP_BACKEND_URL;
 
   const uploadSingleFile = (e) => {
     setFileUrl(URL.createObjectURL(e.target.files[0]));

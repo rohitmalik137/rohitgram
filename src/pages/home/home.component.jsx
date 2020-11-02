@@ -27,8 +27,6 @@ const HomePage = () => {
     };
   }, [dispatch]);
 
-  // console.log(windowWidth);
-
   return (
     <>
       <div className="homePageContainer">

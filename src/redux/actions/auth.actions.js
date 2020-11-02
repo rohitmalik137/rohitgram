@@ -12,7 +12,8 @@ import {
   PASSWORD_RESET_SUCCESS,
 } from './types';
 
-const backend_uri = 'http://localhost:7000';
+const backend_uri = process.env.REACT_APP_BACKEND_URL;
+console.log(process.env.REACT_APP_BACKEND_URL);
 
 //headers
 const config = {
@@ -150,7 +151,6 @@ export const changePassword = ({
 }) => (dispatch, getState) => {
   dispatch(clearErrors());
   const body = JSON.stringify({ username, cpassword, npassword, cnpassword });
-  console.log(body);
   axios
     .patch(`${backend_uri}/auth/changePassword`, body, tokenConfig(getState))
     .then((res) => {

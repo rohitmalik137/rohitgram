@@ -31,7 +31,6 @@ const Header = () => {
   let mainUrl = domain + imgSrc;
 
   const [searchValue, setSearchValue] = useState('');
-  // console.log(windowWidth);
 
   useEffect(() => {
     dispatch(usersList());

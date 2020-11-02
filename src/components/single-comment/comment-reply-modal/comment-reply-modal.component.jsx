@@ -14,7 +14,6 @@ const CommentReplyModal = ({ replyTo, commentId, postId }) => {
 
   const postComment = (e) => {
     e.preventDefault();
-    console.log(comment);
     dispatch(
       replyComment({
         comment,

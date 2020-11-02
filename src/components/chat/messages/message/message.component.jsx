@@ -35,7 +35,6 @@ const Message = ({ currentUser, message, likes, sentAt, sender, msgId }) => {
     handleClose();
   };
   const toggleLikeMessage = (e) => {
-    console.log('clicked!');
     dispatch(
       toggleLikeSingleMessage({ chatId, msgId, userWhoLiked: currentUser })
     );
