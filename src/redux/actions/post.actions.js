@@ -20,7 +20,6 @@ import {
 import { tokenConfig } from './auth.actions';
 
 const backend_uri = process.env.REACT_APP_BACKEND_URL;
-
 const config = {
   headers: {
     'Content-type': 'application/json',

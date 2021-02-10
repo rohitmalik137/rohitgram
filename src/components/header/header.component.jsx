@@ -61,7 +61,12 @@ const Header = () => {
                 <div className="container">
                   <Navbar.Brand>
                     <Link to="/" className="headerBrand">
-                      RohitGram
+                      F<span style={{ color: 'orange' }}> . </span>R
+                      <span style={{ color: 'skyblue' }}> . </span>I
+                      <span style={{ color: 'yellow' }}> . </span>E
+                      <span style={{ color: 'orange' }}> . </span>N
+                      <span style={{ color: 'yellow' }}> . </span>D
+                      <span style={{ color: 'skyblue' }}> . </span>S
                     </Link>
                   </Navbar.Brand>
                   <Form className="m-auto w-50 headerContainer--search">
@@ -155,7 +160,12 @@ const Header = () => {
               <div className="container">
                 <Navbar.Brand>
                   <Link to="/" className="headerBrand">
-                    RohitGram
+                    F<span style={{ color: 'orange' }}> . </span>R
+                    <span style={{ color: 'skyblue' }}> . </span>I
+                    <span style={{ color: 'yellow' }}> . </span>E
+                    <span style={{ color: 'orange' }}> . </span>N
+                    <span style={{ color: 'yellow' }}> . </span>D
+                    <span style={{ color: 'skyblue' }}> . </span>S
                   </Link>
                 </Navbar.Brand>
                 <Form className="m-auto w-50 headerContainer--search">

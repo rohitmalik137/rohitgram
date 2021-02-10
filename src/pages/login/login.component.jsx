@@ -58,7 +58,14 @@ const LoginPage = () => {
     <>
       <div className="loginContainer">
         <div className="loginContainer--upper overall">
-          <h1 className="login-heading">Rohitgram</h1>
+          <h1 className="login-heading">
+            F<span style={{ color: 'orange' }}> . </span>R
+            <span style={{ color: 'skyblue' }}> . </span>I
+            <span style={{ color: 'yellow' }}> . </span>E
+            <span style={{ color: 'orange' }}> . </span>N
+            <span style={{ color: 'yellow' }}> . </span>D
+            <span style={{ color: 'skyblue' }}> . </span>S
+          </h1>
           {msg && <div className="error">{msg}</div>}
           <form onSubmit={handleSubmit}>
             <Input

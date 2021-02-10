@@ -1,6 +1,4 @@
-WIP
 Backend repo. - https://github.com/rohitmalik137/rohitgram-backend
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

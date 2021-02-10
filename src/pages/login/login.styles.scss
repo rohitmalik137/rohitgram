@@ -17,7 +17,10 @@
     }
 
     .login-heading {
-      font-family: 'Oleo Script', cursive;
+      // font-family: 'Oleo Script', cursive;
+      font-family: 'Caveat', cursive;
+      font-size: xx-large;
+      font-weight: bolder;
       padding: 25px;
     }
 
@@ -42,5 +45,15 @@
 @media only screen and (max-width: 450px) {
   .loginContainer {
     width: 90vw;
+
+    .loginContainer--upper {
+      .login-heading {
+        // font-family: 'Oleo Script', cursive;
+        font-family: 'Caveat', cursive;
+        font-size: x-large;
+        font-weight: bold;
+        padding: 20px;
+      }
+    }
   }
 }

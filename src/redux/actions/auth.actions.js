@@ -13,8 +13,7 @@ import {
 } from './types';
 
 const backend_uri = process.env.REACT_APP_BACKEND_URL;
-console.log(process.env.REACT_APP_BACKEND_URL);
-
+console.log(backend_uri);
 //headers
 const config = {
   headers: {
