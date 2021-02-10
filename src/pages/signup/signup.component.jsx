@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { FriendsLogo } from '../../components/friends-logo.component';
 
 import '../login/login.styles.scss';
 import Input from '../../components/input/input.component';
